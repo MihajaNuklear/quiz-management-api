@@ -1,0 +1,92 @@
+image: node-front-runner
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+stages:
+  - build
+  - deploy
+
+build_dev:
+  stage: build
+  variables:
+    TAR_NAME: 'nestjs-cm-student-api.tar'
+    RUNNER_DIR: '/home/itras/apps/campus-management/dev/$CI_PROJECT_NAME'
+    DEPL_DIR: '/home/itras/apps/campus-management/dev'
+    HOSTER_DIR: '~/campus-management'
+    BUILD_PARAM: 'nestjs-cm-student-api'
+  only:
+    refs:
+      - develop
+  script:
+    - source ~/.bashrc
+    - sudo apt-get update && sudo apt-get install ca-certificates curl && sudo install -m 0755 -d /etc/apt/keyrings && sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc && sudo chmod a+r /etc/apt/keyrings/docker.asc
+    - echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+    - sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    - sudo groupadd docker
+    - sudo usermod -aG docker $USER
+
+    - cp ${PRODUCT_ENV_FILE} ./.env
+    - docker build -t $CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG .
+    - docker save -o $TAR_NAME $CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG
+    - scp $TAR_NAME $SSH_USER@$IP_ADDRESS:$DEPL_DIR
+    - rm $TAR_NAME
+
+deploy_dev:
+  stage: deploy
+  variables:
+    TAR_NAME: 'nestjs-cm-student-api.tar'
+    RUNNER_DIR: '/home/itras/apps/campus-management/dev/$CI_PROJECT_NAME'
+    HOSTER_DIR: '~/campus-management'
+    DEPL_DIR: '/home/itras/apps/campus-management/dev'
+    BUILD_PARAM: 'nestjs-cm-student-api'
+  when: manual
+  only:
+    refs:
+      - develop
+  script:
+    - ssh $SSH_USER@$IP_ADDRESS "docker load -i $DEPL_DIR/$TAR_NAME"
+    - ssh $SSH_USER@$IP_ADDRESS "cd $DEPL_DIR && docker compose rm -sf campus-management-api"
+    - ssh $SSH_USER@$IP_ADDRESS "docker run -d --name campus-management-api $CI_PROJECT_NAME:$CI_COMMIT_REF_SLUG"
+
+build_prod:
+  stage: build
+  variables:
+    TAR_NAME: 'nestjs-innovation-campus-api.tar.gz'
+    RUNNER_DIR: '/home/runner/fs1/$CI_PROJECT_NAME/prod'
+    HOSTER_DIR: '/home/itras/www/innovation-campus-admin'
+    DEPL_DIR: '/home/runner/fs1/innovation-campus-admin-docker/prod/deployment'
+    BUILD_PARAM: 'nestjs-innovation-campus-api'
+  only:
+    refs:
+      - master
+  script:
+    - source ~/.bashrc
+    - nvm use 16.13.2
+    - npm install --legacy-peer-deps
+    - npm run lint
+    - npm run build:prod
+    - ssh runner@192.168.2.38 "mkdir -p $RUNNER_DIR"
+    - ssh runner@192.168.2.38 "chmod 777 $RUNNER_DIR"
+    - ssh runner@192.168.2.38 "rm -rf $RUNNER_DIR/*"
+    - tar -zcf $TAR_NAME dist/$CI_PROJECT_NAME/
+    - scp -r $TAR_NAME runner@192.168.2.38:$RUNNER_DIR
+    - rm $TAR_NAME
+
+deploy_prod:
+  stage: deploy
+  variables:
+    TAR_NAME: 'nestjs-innovation-campus-api.tar.gz'
+    RUNNER_DIR: '/home/runner/fs1/$CI_PROJECT_NAME/prod'
+    HOSTER_DIR: '/home/itras/www/innovation-campus-admin'
+    DEPL_DIR: '/home/runner/fs1/innovation-campus-admin-docker/prod/deployment'
+    BUILD_PARAM: 'nestjs-innovation-campus-api'
+  when: manual
+  only:
+    refs:
+      - master
+  script:
+    - ssh -p 4826 itras@5.196.174.40 "chmod +x $HOSTER_DIR/fast-deploy.sh"
+    - ssh -p 4826 itras@5.196.174.40 "(cd $HOSTER_DIR && ./fast-deploy.sh nestjs-innovation-campus-api)"
