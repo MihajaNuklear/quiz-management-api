@@ -1,0 +1,248 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .line {
+        position: relative;
+        width: 100%;
+        height: 1px;
+        background-color: black;
+      }
+      .line:before,
+      .line:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 25%;
+        height: 100%;
+        background-color: black;
+      }
+      .line:after {
+        left: 25%;
+      }
+      .line:before {
+        left: 50%;
+      }
+      .line:after {
+        left: 75%;
+      }
+    </style>
+  </head>
+  <body>
+    <hr class="line" />
+  </body>
+</html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:v="urn:schemas-microsoft-com:vml"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://fonts.cdnfonts.com/css/calibri-light"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Calibri Light", sans-serif;
+      }
+      html {
+        margin: 0 auto;
+        padding: 0;
+      }
+      body {
+        padding: 0;
+        margin: 0 auto;
+        display: block;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: start;
+      }
+      .standard-text {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 20px;
+        text-align: start;
+      }
+      .mt15 {
+        margin-bottom: 15px;
+      }
+      .mb15 {
+        margin-bottom: 15px;
+      }
+      .text-grey {
+        font-weight: 500;
+        color: #3d3d3d;
+      }
+      .text-grey2 {
+        color: #3d3d3d;
+      }
+      .text-blue {
+        font-size: 11px;
+        font-weight: 500;
+        color: #0231a8;
+      }
+      .container {
+        display: block;
+        margin: 0 auto;
+        justify-content: center;
+        align-content: center;
+        padding: 20px;
+      }
+      .email-container {
+        width: 700px;
+        display: block;
+        justify-content: start;
+        align-items: start;
+        justify-self: start;
+        margin: 0 auto;
+        margin-top: 20px;
+        background: #fcf9f9;
+        padding: 30px;
+        border-radius: 5px;
+      }
+      .email-content {
+        margin-top: 20px;
+      }
+      .greeting {
+        display: block;
+        justify-content: start;
+      }
+      .label {
+        font-weight: 700;
+      }
+      .step {
+        margin-left: 40px;
+      }
+      .email-footer {
+        display: block;
+        justify-self: start;
+        line-height: 20px;
+      }
+      .fs10 {
+        font-size: 10px;
+        font-family: "Calibri Light", sans-serif;
+        line-height: 20px;
+        text-align: start;
+      }
+      @media screen and (max-width: 780px) {
+        .container {
+          margin: auto;
+          display: flex;
+          justify-content: center;
+          align-content: center;
+          padding: 5px;
+        }
+        .email-container {
+          width: 700px;
+          display: block;
+          margin-top: 0px;
+          background: #f5f5f5;
+          padding: 20px;
+        }
+      }
+      .uppercase {
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+
+  <body class="body-container">
+    <div class="container">
+      <div class="email-container">
+        <div class="logo">
+          <img
+            src="https://i.imgur.com/XMv5crO.png"
+            width="150px"
+            alt="Ic Logo"
+          />
+        </div>
+        <div class="email-content">
+          <div class="greeting mb15">
+            <p class="standard-text mb15">{{gender}} {{fullname}},</p>
+            <p class="standard-text">
+              Nous vous remercions pour votre inscription à la première étape du
+              concours d'entrée en Développement Fullstack à l'Innovation
+              Campus. Nous sommes ravis de vous accueillir parmi les candidats,
+              et vous trouverez ci-dessous les détails de votre inscription :
+            </p>
+          </div>
+          <div class="info-perso mb15">
+            <div>
+              <label class="label">Nom: </label
+              ><span class="info-value uppercase">{{lastname}}</span>
+            </div>
+            <div>
+              <label class="label">Prénom(s): </label
+              ><span class="info-value">{{firstname}}</span>
+            </div>
+            <div>
+              <label class="label">Formation: </label
+              ><span class="info-value">Développement Full Stack</span>
+            </div>
+          </div>
+          <div class="title-step label mb15">
+            <span>Étape suivante : Création du mot de passe</span>
+          </div>
+          <p class="mb15">
+            Pour accéder à votre espace candidature et suivre l'évolution de
+            votre dossier, veuillez suivre les étapes ci-dessous :
+          </p>
+          <div class="step mb15">
+            <ol>
+              <li>
+                Cliquez sur le lien suivant :
+                <a href="{{linkToSummary}}"
+                  >{{link}}</a
+                >
+              </li>
+              <li>
+                Vous serez {{redirige}} vers une page où vous pourrez créer
+                votre identifiant de connexion ainsi que votre mot de passe.
+              </li>
+              <li>
+                Utilisez votre identifiant de connexion et le nouveau mot de
+                passe pour vous connecter à votre espace candidature.
+              </li>
+            </ol>
+          </div>
+          <p class="mb15">
+            Chaque candidature sera attentivement évaluée du
+            <b>{{startDate}}</b>
+            au
+            <b>{{endDate}}</b>. Les candidats sélectionnés auront la possibilité
+            de passer à la prochaine étape, qui est le Bootcamp. Nous vous
+            encourageons vivement à consulter régulièrement votre espace
+            candidature afin de suivre l'évolution de votre dossier tout au long
+            du concours, y compris les informations relatives aux épreuves à
+            venir.
+          </p>
+          <p class="mb15">
+            N'hésitez pas à nous contacter à l’adresse contact@ic.mg si vous
+            avez des questions pendant tout le processus.
+          </p>
+          <p class="mb15">
+            Nous vous souhaitons beaucoup de succès dans votre préparation.
+          </p>
+          <p class="mb15">Sincères salutations,</p>
+          <div class="email-footer mb15">
+            <p class="text-blue">Bureau d’Administration</p>
+            <p class="text-blue">Innovation Campus</p>
+            <p class="fs10">II A 105 Campus J Nanisana</p>
+            <p class="fs10">Antananarivo 101</p>
+            <p class="fs10">Madagascar</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

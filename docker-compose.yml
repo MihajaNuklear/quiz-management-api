@@ -1,0 +1,20 @@
+version: '3'
+services:
+  campus-management-api:
+    container_name: campus-management-api
+    build: .
+    volumes:
+      - /app
+      - /app/node_modules
+    ports:
+      - "21622:3000"
+    expose:
+      - 21622
+    command: npm run start
+    env_file:
+      - .env
+      
+# networks:
+#   default:
+#     external: true
+#     name: cm_network
