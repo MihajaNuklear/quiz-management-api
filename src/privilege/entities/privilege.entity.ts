@@ -93,6 +93,12 @@ export enum PrivilegeName {
   EDIT_HISTORY = 'EDIT_HISTORY', // Modification HISTORY
   DELETE_HISTORY = 'DELETE_HISTORY', // Suppression HISTORY
 
+  
+  VIEW_QUIZ = 'VIEW_QUIZ', // Consultation liste CURSUS
+  CREATE_QUIZ = 'CREATE_QUIZ', // Création CURSUS
+  EDIT_QUIZ = 'EDIT_QUIZ', // Modification CURSUS
+  DELETE_QUIZ = 'DELETE_QUIZ', // Suppression CURSUS
+
   VIEW_SETTING = 'VIEW_SETTING',
 }
 
