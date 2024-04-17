@@ -1,0 +1,74 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "Quiz",
+    "dateExported": "2024-04-17T13:14:38.650Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "4d4ddb6c-7474-45f8-9e0f-8e09cb8c1593",
+            "name": "backend",
+            "containerId": "",
+            "created": "2024-04-17T12:55:30.741Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "e3e1dc26-8126-4732-a208-fe5b0a613bc7",
+            "name": "user",
+            "containerId": "4d4ddb6c-7474-45f8-9e0f-8e09cb8c1593",
+            "created": "2024-04-17T12:55:56.353Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "7957fce4-1b58-4ede-b6ed-a66cae928501",
+            "name": "quiz",
+            "containerId": "4d4ddb6c-7474-45f8-9e0f-8e09cb8c1593",
+            "created": "2024-04-17T12:57:18.763Z",
+            "sortNum": 30000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "91a0545b-6eaa-4711-a012-8a9bbf07dc73",
+            "colId": "f9060c72-edce-44b0-8d08-cb73c8ab5a70",
+            "containerId": "e3e1dc26-8126-4732-a208-fe5b0a613bc7",
+            "name": "login",
+            "url": "http://localhost:3000/authentication/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-04-17T12:56:05.501Z",
+            "modified": "2024-04-17T12:56:39.450Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"login\":\"admin\",\n  \"password\":\"admin\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "803fb8d8-1441-49b1-9230-2954af31e44f",
+            "colId": "f9060c72-edce-44b0-8d08-cb73c8ab5a70",
+            "containerId": "7957fce4-1b58-4ede-b6ed-a66cae928501",
+            "name": "post",
+            "url": "http://localhost:3000/quiz",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2024-04-17T12:57:59.619Z",
+            "modified": "2024-04-17T13:04:37.869Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYxZmM1Y2U3OTc2OTdmYTU4YWFhZjE3IiwiZ3JvdXBzIjpbIjY2MWZjNWNlNzk3Njk3ZmE1OGFhYWUwNCJdLCJpYXQiOjE3MTMzNTg3NDAsImV4cCI6MTcxMzM5NDc0MH0.ZLk_B8tcVfvUAq6XRhdC5IpscXNQwZyL7EYrkf9E1AM"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"question\":\"what ?\",\n  \"choice\":[\"z\"],\n  \"trueAnswer\":0\n}",
+                "form": []
+            },
+            "tests": []
+        }
+    ]
+}
