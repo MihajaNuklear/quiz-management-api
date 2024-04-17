@@ -1,42 +1,64 @@
 {
     "client": "Thunder Client",
     "collectionName": "Quiz",
-    "dateExported": "2024-04-17T14:04:52.856Z",
+    "dateExported": "2024-04-17T22:50:29.791Z",
     "version": "1.1",
     "folders": [
         {
-            "_id": "4d4ddb6c-7474-45f8-9e0f-8e09cb8c1593",
+            "_id": "34b94135-bd0f-4109-a0c5-f8e8bcabc8a4",
             "name": "backend",
             "containerId": "",
-            "created": "2024-04-17T12:55:30.741Z",
+            "created": "2024-04-17T21:53:07.058Z",
             "sortNum": 10000
         },
         {
-            "_id": "e3e1dc26-8126-4732-a208-fe5b0a613bc7",
+            "_id": "eabf3c8f-f3ec-44ad-bf85-fc3c8fdb419c",
             "name": "user",
-            "containerId": "4d4ddb6c-7474-45f8-9e0f-8e09cb8c1593",
-            "created": "2024-04-17T12:55:56.353Z",
+            "containerId": "34b94135-bd0f-4109-a0c5-f8e8bcabc8a4",
+            "created": "2024-04-17T21:53:07.059Z",
             "sortNum": 20000
         },
         {
-            "_id": "7957fce4-1b58-4ede-b6ed-a66cae928501",
-            "name": "quiz",
-            "containerId": "4d4ddb6c-7474-45f8-9e0f-8e09cb8c1593",
-            "created": "2024-04-17T12:57:18.763Z",
+            "_id": "d128c9b1-c25b-474a-a62e-86df125ed9a3",
+            "name": "question",
+            "containerId": "34b94135-bd0f-4109-a0c5-f8e8bcabc8a4",
+            "created": "2024-04-17T21:53:07.060Z",
             "sortNum": 30000
         }
     ],
     "requests": [
         {
-            "_id": "91a0545b-6eaa-4711-a012-8a9bbf07dc73",
-            "colId": "f9060c72-edce-44b0-8d08-cb73c8ab5a70",
-            "containerId": "e3e1dc26-8126-4732-a208-fe5b0a613bc7",
+            "_id": "3c6d264a-7565-4f69-849b-34b7a8ce8a44",
+            "colId": "31bdb4f8-36fe-4824-932f-0189ee6a1f0a",
+            "containerId": "d128c9b1-c25b-474a-a62e-86df125ed9a3",
+            "name": "post",
+            "url": "http://localhost:3000/question",
+            "method": "POST",
+            "sortNum": 17500,
+            "created": "2024-04-17T21:53:07.059Z",
+            "modified": "2024-04-17T21:59:36.561Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMDJjNWM5ZGM3M2NkOTQwM2JmYjkxIiwiZ3JvdXBzIjpbIjY2MjAyYzU3OWRjNzNjZDk0MDNiZmE3ZSJdLCJpYXQiOjE3MTMzOTExMzIsImV4cCI6MTcxMzQyNzEzMn0.rqVnOAzcVWUl0DEJ7TX3mlBEf273Q8w3AVv06pEJ6ac"
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"questionAsked\":\"what 3?\",\n  \"choice\":[\"z\"],\n  \"trueAnswer\":0\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "c404e252-22bc-4032-9813-d9723e91c48c",
+            "colId": "31bdb4f8-36fe-4824-932f-0189ee6a1f0a",
+            "containerId": "eabf3c8f-f3ec-44ad-bf85-fc3c8fdb419c",
             "name": "login",
             "url": "http://localhost:3000/authentication/login",
             "method": "POST",
             "sortNum": 20000,
-            "created": "2024-04-17T12:56:05.501Z",
-            "modified": "2024-04-17T12:56:39.450Z",
+            "created": "2024-04-17T21:53:07.058Z",
+            "modified": "2024-04-17T21:53:07.058Z",
             "headers": [],
             "params": [],
             "body": {
@@ -47,28 +69,38 @@
             "tests": []
         },
         {
-            "_id": "803fb8d8-1441-49b1-9230-2954af31e44f",
-            "colId": "f9060c72-edce-44b0-8d08-cb73c8ab5a70",
-            "containerId": "7957fce4-1b58-4ede-b6ed-a66cae928501",
-            "name": "post",
+            "_id": "efb65bc7-7aa2-4426-9976-7feab78c3e5d",
+            "colId": "31bdb4f8-36fe-4824-932f-0189ee6a1f0a",
+            "containerId": "d128c9b1-c25b-474a-a62e-86df125ed9a3",
+            "name": "get  without reponse ",
             "url": "http://localhost:3000/question",
-            "method": "POST",
-            "sortNum": 40000,
-            "created": "2024-04-17T12:57:59.619Z",
-            "modified": "2024-04-17T13:56:20.471Z",
+            "method": "GET",
+            "sortNum": 26250,
+            "created": "2024-04-17T22:20:53.735Z",
+            "modified": "2024-04-17T22:20:53.735Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYxZmM1Y2U3OTc2OTdmYTU4YWFhZjE3IiwiZ3JvdXBzIjpbIjY2MWZjNWNlNzk3Njk3ZmE1OGFhYWUwNCJdLCJpYXQiOjE3MTMzNTg3NDAsImV4cCI6MTcxMzM5NDc0MH0.ZLk_B8tcVfvUAq6XRhdC5IpscXNQwZyL7EYrkf9E1AM"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMDJjNWM5ZGM3M2NkOTQwM2JmYjkxIiwiZ3JvdXBzIjpbIjY2MjAyYzU3OWRjNzNjZDk0MDNiZmE3ZSJdLCJpYXQiOjE3MTMzOTExMzIsImV4cCI6MTcxMzQyNzEzMn0.rqVnOAzcVWUl0DEJ7TX3mlBEf273Q8w3AVv06pEJ6ac"
                 }
-            ],
-            "params": [],
-            "body": {
-                "type": "json",
-                "raw": "{\n  \"questionAsked\":\"what ?\",\n  \"choice\":[\"z\"],\n  \"trueAnswer\":0\n}",
-                "form": []
-            },
-            "tests": []
+            ]
+        },
+        {
+            "_id": "299ecc0a-2893-4297-b819-b372ea3a0fb8",
+            "colId": "31bdb4f8-36fe-4824-932f-0189ee6a1f0a",
+            "containerId": "d128c9b1-c25b-474a-a62e-86df125ed9a3",
+            "name": "get  with reponse",
+            "url": "http://localhost:3000/question/answer",
+            "method": "GET",
+            "sortNum": 35000,
+            "created": "2024-04-17T21:59:43.347Z",
+            "modified": "2024-04-17T22:28:18.242Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMDJjNWM5ZGM3M2NkOTQwM2JmYjkxIiwiZ3JvdXBzIjpbIjY2MjAyYzU3OWRjNzNjZDk0MDNiZmE3ZSJdLCJpYXQiOjE3MTMzOTExMzIsImV4cCI6MTcxMzQyNzEzMn0.rqVnOAzcVWUl0DEJ7TX3mlBEf273Q8w3AVv06pEJ6ac"
+                }
+            ]
         }
     ]
 }
