@@ -31,11 +31,19 @@ export class QuestionService {
    * Get list of all Questions
    * @returns List of all Questions
    */
-  async findAll() {
+  async findAllWithoutAnswer() {
     const result = await this.QuestionRepository.find({}).select('-trueAnswer');
     return result;
   }
 
+   /**
+   * Get list of all Questions
+   * @returns List of all Questions
+   */
+   async findAllWithAnswer() {
+    const result = await this.QuestionRepository.find({});
+    return result;
+  }
   /**
    * Find Question with specific id
    * @param id _id of Question

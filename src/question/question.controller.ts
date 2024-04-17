@@ -38,13 +38,24 @@ export class QuestionController {
   }
 
   /**
+   * Get all Questions inside database without answer
+   * @param res Fastify response
+   */
+  @RequirePrivilege(PrivilegeName.VIEW_QUIZ)
+  @Get('')
+  async findAllWithoutAnswer(@Res() res: FastifyReply) {
+    const result = await this.QuestionService.findAllWithoutAnswer();
+    HttpResponseService.sendSuccess<Question[]>(res, HttpStatus.OK, result);
+  }
+
+  /**
    * Get all Questions inside database
    * @param res Fastify response
    */
   @RequirePrivilege(PrivilegeName.VIEW_QUIZ)
-  @Get()
-  async findAll(@Res() res: FastifyReply) {
-    const result = await this.QuestionService.findAll();
+  @Get('answer')
+  async findAllWithAnswer(@Res() res: FastifyReply) {
+    const result = await this.QuestionService.findAllWithAnswer();
     HttpResponseService.sendSuccess<Question[]>(res, HttpStatus.OK, result);
   }
 
