@@ -2,9 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { QuestionRepository } from './question.repository';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
-import { HistoryService } from '../history/history.service';
 import { CountRepository } from '../count/count.repository';
-import { STUDENT_BASE_USERNAME } from '../count/count.constant';
 
 @Injectable()
 export class QuestionService {
@@ -14,7 +12,6 @@ export class QuestionService {
    */
   constructor(
     private readonly QuestionRepository: QuestionRepository,
-    private readonly historyService: HistoryService,
     private readonly countRepository: CountRepository,
   ) {}
 
