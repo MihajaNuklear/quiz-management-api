@@ -34,6 +34,12 @@ export class Count {
    */
   @Prop({ type: Number, default: 0 })
   countAdministrationValue: number;
+
+  /**
+   * count quiz Value
+   */
+  @Prop({ type: Number, default: 0 })
+  countQuizValue: number;
 }
 
 /**
