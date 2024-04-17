@@ -1439,7 +1439,7 @@ const createNewRoleAdmin: ScriptFn = async (
   });
 
   const admin_includFilter = ['CREATE', 'VIEW', 'EDIT'];
-  const admin_excludFilter = ['DELETE', 'EDIT_GROUP', 'CREATE_GROUP']000;
+  const admin_excludFilter = ['DELETE', 'EDIT_GROUP', 'CREATE_GROUP'];
 
   const privileges: Privilege[] = await privilegeRepository
     .find({
