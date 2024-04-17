@@ -1,7 +1,7 @@
 {
     "client": "Thunder Client",
     "collectionName": "Quiz",
-    "dateExported": "2024-04-17T13:45:50.150Z",
+    "dateExported": "2024-04-17T14:04:52.856Z",
     "version": "1.1",
     "folders": [
         {
@@ -55,7 +55,7 @@
             "method": "POST",
             "sortNum": 40000,
             "created": "2024-04-17T12:57:59.619Z",
-            "modified": "2024-04-17T13:45:34.322Z",
+            "modified": "2024-04-17T13:56:20.471Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -65,7 +65,7 @@
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"questionNumber\":1,\n  \"questionAsked\":\"what ?\",\n  \"choice\":[\"z\"],\n  \"trueAnswer\":0\n}",
+                "raw": "{\n  \"questionAsked\":\"what ?\",\n  \"choice\":[\"z\"],\n  \"trueAnswer\":0\n}",
                 "form": []
             },
             "tests": []
