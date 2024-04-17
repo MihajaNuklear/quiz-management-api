@@ -32,7 +32,7 @@ import { EventsModule } from './events/events.module';
 import { SessionModule } from './session/session.module';
 import { RegistrationPeriodModule } from './registration-period/registration-period.module';
 import { AppController } from './app.controller';
-import { QuizModule } from './quiz/quiz.module';
+import { QuestionModule } from './question/question.module';
 
 @Module({
   imports: [
@@ -64,7 +64,7 @@ import { QuizModule } from './quiz/quiz.module';
     EventsModule,
     SessionModule,
     RegistrationPeriodModule,
-    QuizModule
+    QuestionModule
   ],
   controllers: [AppController],
   providers: [
