@@ -14,7 +14,7 @@ export class Question {
   /**
    * question question
    */
-  @Prop({ type: String })
+  @Prop({ type: String, default: 0 })
   questionNumber: string;
 
   /**

@@ -7,12 +7,14 @@ import { PrivilegeModule } from '../privilege/privilege.module';
 import { HistoryModule } from '../history/history.module';
 import { QuestionRepository } from './question.repository';
 import { QuestionService } from './question.service';
+import { CountModule } from '../count/count.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Question.name, schema: QuestionSchema }]),
     PrivilegeModule,
     HistoryModule,
+    CountModule
   ],
   controllers: [QuestionController],
   providers: [QuestionService, QuestionRepository],

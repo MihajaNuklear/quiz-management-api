@@ -3,8 +3,8 @@ import { QuestionRepository } from './question.repository';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { HistoryService } from '../history/history.service';
- 
- 
+import { CountRepository } from '../count/count.repository';
+import { STUDENT_BASE_USERNAME } from '../count/count.constant';
 
 @Injectable()
 export class QuestionService {
@@ -15,7 +15,7 @@ export class QuestionService {
   constructor(
     private readonly QuestionRepository: QuestionRepository,
     private readonly historyService: HistoryService,
- 
+    private readonly countRepository: CountRepository,
   ) {}
 
   /**
@@ -25,7 +25,8 @@ export class QuestionService {
    */
 
   async create(createQuestionDto: CreateQuestionDto) {
-    const result = await this.QuestionRepository.create(createQuestionDto);
+    const questionNumber = await this.generatingUsernameQuestion()
+    const result = await this.QuestionRepository.create({...createQuestionDto,questionNumber:questionNumber});
     return result;
   }
 
@@ -72,23 +73,20 @@ export class QuestionService {
     return result;
   }
 
-    /**
+  /**
    * Generate Username Question Number
  
    * @returns Username Question Number with based name
    */
-    // async generatingUsernameQuestion(): Promise<string> {
-    //   let count = 1;
-    //   const countQueue: any | null = await this.countRepository.findOne({});
-    //   const lastCount = countQueue.countQuestionValue;
-    //   count = lastCount === 0 ? 1 : lastCount + 1;
-    //   const newUsername = `${STUDENT_BASE_USERNAME}${count
-    //     .toString()
-    //     .padStart(4, '0')}`;
-    //   await this.countRepository.update(countQueue._id, {
-    //     countQuestionValue: count,
-    //   });
-    //   return newUsername;
-    // }
- 
+  async generatingUsernameQuestion(): Promise<string> {
+    let count = 1;
+    const countQueue: any | null = await this.countRepository.findOne({});
+    const lastCount = countQueue.countQuestionValue;
+    count = lastCount === 0 ? 1 : lastCount + 1;
+    const newUsername = `${count.toString().padStart(4, '0')}`;
+    await this.countRepository.update(countQueue._id, {
+      countQuestionValue: count,
+    });
+    return newUsername;
+  }
 }
