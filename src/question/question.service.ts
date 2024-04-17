@@ -32,7 +32,7 @@ export class QuestionService {
    * @returns List of all Questions
    */
   async findAll() {
-    const result = await this.QuestionRepository.find({});
+    const result = await this.QuestionRepository.find({}).select('-trueAnswer');
     return result;
   }
 
