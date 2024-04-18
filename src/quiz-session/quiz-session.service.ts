@@ -38,13 +38,9 @@ export class QuizSessionService {
    * update Question Already Used
    */
   async updateQuestionAlreadyUsed(listQuestionResult: QuestionResult[]) {
-    const today = new Date();
-    const dateString = today.toLocaleDateString();
-    const timeString = today.toLocaleTimeString();
     listQuestionResult.map((questionResult: QuestionResult) => {
       this.questionService.update(questionResult.question as string, {
-        wasUsedDate: dateString,
-        wasUsedTime: timeString,
+        wasUsedDate: new Date(),
       });
     });
   }

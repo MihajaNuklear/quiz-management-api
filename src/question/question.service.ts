@@ -39,9 +39,13 @@ export class QuestionService {
    * Get list of all Questions
    * @returns List of all Questions
    */
-  async findAllWithoutAnswer(size: number) {
+  async findAllWithoutAnswer(unusedSince: number, size: number) {
+    const limitDate = new Date(Date.now() - unusedSince * 1000);
     const questionsWithoutAnswer = await this.QuestionRepository.find({
-      wasUsedDate: '',
+      $or: [
+        { wasUsedDate: { $lt: limitDate } },
+        { wasUsedDate: { $exists: false } },
+      ],
     })
       .select('-trueAnswer')
       .limit(50);
@@ -53,9 +57,14 @@ export class QuestionService {
     return selectedQuestions;
   }
 
+  /**
+   * Get list of random Questions not already used
+   * @returns List of Questions not already used
+   */
+
   getRandomQuestions(questions: any[], size: number) {
-    const shuffled = questions.sort(() => 0.5 - Math.random()); // Mélanger le tableau
-    return shuffled.slice(0, size); // Sélectionner un échantillon de taille spécifiée
+    const shuffled = questions.sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, size);
   }
   /**
    * Get list of all Questions

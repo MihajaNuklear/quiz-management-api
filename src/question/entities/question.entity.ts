@@ -38,14 +38,8 @@ export class Question {
   /**
    * question was used date
    */
-  @Prop({ type: String, default: '' })
-  wasUsedDate?: String;
-
-  /**
-   * question was used time
-   */
-  @Prop({ type: String, default: '' })
-  wasUsedTime?: string;
+  @Prop({ type: Date })
+  wasUsedDate?: Date;
 }
 
 /**
