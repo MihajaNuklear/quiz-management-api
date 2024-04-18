@@ -2,8 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { QuizSessionRepository } from './quiz-session.repository';
 import { CreateQuizSessionDto } from './dto/create-quiz-session.dto';
 import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
-import { ActionName } from '../history/entity/history.entity';
 import { HistoryService } from '../history/history.service';
+
+import { QuestionResult } from './entities/quiz-session.entity';
+import { QuestionService } from '../question/question.service';
 
 @Injectable()
 export class QuizSessionService {
@@ -13,6 +15,7 @@ export class QuizSessionService {
    */
   constructor(
     private readonly QuizSessionRepository: QuizSessionRepository,
+    private readonly questionService: QuestionService,
     private readonly historyService: HistoryService,
   ) {}
 
@@ -23,8 +26,28 @@ export class QuizSessionService {
    */
 
   async create(createQuizSessionDto: CreateQuizSessionDto) {
-    const result = await this.QuizSessionRepository.create(createQuizSessionDto);
+    const { user, quiz } = createQuizSessionDto;
+    await this.updateQuestionAlreadyUsed(quiz);
+    const result = await this.QuizSessionRepository.create(
+      createQuizSessionDto,
+    );
     return result;
+  }
+
+  /**
+   * update Question Already Used
+   * @returns List of all QuizSessions
+   */
+  async updateQuestionAlreadyUsed(listQuestionResult: QuestionResult[]) {
+    const today = new Date();
+    const dateString = today.toLocaleDateString();
+    const timeString = today.toLocaleTimeString();
+    listQuestionResult.map((questionResult: QuestionResult) => {
+      this.questionService.update(questionResult.question as string, {
+        wasUsedDate: dateString,
+        wasUsedTime: timeString,
+      });
+    });
   }
 
   /**
@@ -55,7 +78,10 @@ export class QuizSessionService {
    */
 
   async update(id: string, updateQuizSessionDto: UpdateQuizSessionDto) {
-    const result = await this.QuizSessionRepository.update(id, updateQuizSessionDto);
+    const result = await this.QuizSessionRepository.update(
+      id,
+      updateQuizSessionDto,
+    );
     return result;
   }
 

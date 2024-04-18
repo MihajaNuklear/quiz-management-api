@@ -6,12 +6,16 @@ import { QuizSessionRepository } from './quiz-session.repository';
 import { QuizSessionService } from './quiz-session.service';
 import { PrivilegeModule } from '../privilege/privilege.module';
 import { HistoryModule } from '../history/history.module';
+import { QuestionModule } from '../question/question.module';
 
 @Module({
   imports: [
-    MongooseModule.forFeature([{ name: QuizSession.name, schema: QuizSessionSchema }]),
+    MongooseModule.forFeature([
+      { name: QuizSession.name, schema: QuizSessionSchema },
+    ]),
     PrivilegeModule,
     HistoryModule,
+    QuestionModule,
   ],
   controllers: [QuizSessionController],
   providers: [QuizSessionService, QuizSessionRepository],
