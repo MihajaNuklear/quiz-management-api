@@ -2,11 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { QuizSessionRepository } from './quiz-session.repository';
 import { CreateQuizSessionDto } from './dto/create-quiz-session.dto';
 import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
-import { HistoryService } from '../history/history.service';
-
 import { QuestionResult } from './entities/quiz-session.entity';
 import { QuestionService } from '../question/question.service';
-import path from 'path';
 
 @Injectable()
 export class QuizSessionService {
