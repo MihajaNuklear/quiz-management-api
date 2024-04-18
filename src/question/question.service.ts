@@ -3,6 +3,9 @@ import { QuestionRepository } from './question.repository';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { CountRepository } from '../count/count.repository';
+import { Question, QuestionDocument } from './entities/question.entity';
+import { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class QuestionService {
@@ -13,6 +16,8 @@ export class QuestionService {
   constructor(
     private readonly QuestionRepository: QuestionRepository,
     private readonly countRepository: CountRepository,
+    @InjectModel(Question.name)
+    private readonly QuestionModel: Model<QuestionDocument>,
   ) {}
 
   /**
@@ -35,12 +40,23 @@ export class QuestionService {
    * @returns List of all Questions
    */
   async findAllWithoutAnswer(size: number) {
-    const result = await this.QuestionRepository.find({})
+    const questionsWithoutAnswer = await this.QuestionRepository.find({
+      wasUsedDate: '',
+    })
       .select('-trueAnswer')
-      .limit(size);
-    return result;
+      .limit(50);
+
+    const selectedQuestions = this.getRandomQuestions(
+      questionsWithoutAnswer,
+      size,
+    );
+    return selectedQuestions;
   }
 
+  getRandomQuestions(questions: any[], size: number) {
+    const shuffled = questions.sort(() => 0.5 - Math.random()); // Mélanger le tableau
+    return shuffled.slice(0, size); // Sélectionner un échantillon de taille spécifiée
+  }
   /**
    * Get list of all Questions
    * @returns List of all Questions

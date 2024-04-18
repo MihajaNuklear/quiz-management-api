@@ -47,7 +47,7 @@ export class QuestionController {
     @Param('size') size: number,
     @Res() res: FastifyReply,
   ) {
-    const result = await this.QuestionService.findAllWithoutAnswer(size);
+    const result: any = await this.QuestionService.findAllWithoutAnswer(size);
     HttpResponseService.sendSuccess<Question[]>(res, HttpStatus.OK, result);
   }
 

@@ -28,10 +28,10 @@ export class QuizSessionService {
     const session = await this.QuizSessionRepository.create(
       createQuizSessionDto,
     );
-    const sessionWithQuestion = await this.QuizSessionRepository.findById(
+    const sessionWithCorrection = await this.QuizSessionRepository.findById(
       session._id as string,
     ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
-    return sessionWithQuestion;
+    return sessionWithCorrection;
   }
 
   /**

@@ -5,6 +5,7 @@ import { Question, QuestionDocument } from './entities/question.entity';
 
 @Injectable()
 export class QuestionRepository extends BaseRepository<QuestionDocument, Question> {
+  [x: string]: any;
   constructor(@InjectModel(Question.name) model) {
     super(model);
   }
