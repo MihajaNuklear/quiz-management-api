@@ -22,8 +22,11 @@ export class QuestionService {
    */
 
   async create(createQuestionDto: CreateQuestionDto) {
-    const questionNumber = await this.generatingUsernameQuestion()
-    const result = await this.QuestionRepository.create({...createQuestionDto,questionNumber:questionNumber});
+    const questionNumber = await this.generatingUsernameQuestion();
+    const result = await this.QuestionRepository.create({
+      ...createQuestionDto,
+      questionNumber: questionNumber,
+    });
     return result;
   }
 
@@ -31,17 +34,19 @@ export class QuestionService {
    * Get list of all Questions
    * @returns List of all Questions
    */
-  async findAllWithoutAnswer() {
-    const result = await this.QuestionRepository.find({}).select('-trueAnswer');
+  async findAllWithoutAnswer(size: number) {
+    const result = await this.QuestionRepository.find({})
+      .select('-trueAnswer')
+      .limit(size);
     return result;
   }
 
-   /**
+  /**
    * Get list of all Questions
    * @returns List of all Questions
    */
-   async findAllWithAnswer() {
-    const result = await this.QuestionRepository.find({});
+  async findAllWithAnswer(size: number) {
+    const result = await this.QuestionRepository.find({}).limit(size);
     return result;
   }
   /**

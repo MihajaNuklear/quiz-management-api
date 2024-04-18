@@ -42,9 +42,12 @@ export class QuestionController {
    * @param res Fastify response
    */
   @RequirePrivilege(PrivilegeName.VIEW_QUIZ)
-  @Get('')
-  async findAllWithoutAnswer(@Res() res: FastifyReply) {
-    const result = await this.QuestionService.findAllWithoutAnswer();
+  @Get('no-answer/:size?')
+  async findAllWithoutAnswer(
+    @Param('size') size: number,
+    @Res() res: FastifyReply,
+  ) {
+    const result = await this.QuestionService.findAllWithoutAnswer(size);
     HttpResponseService.sendSuccess<Question[]>(res, HttpStatus.OK, result);
   }
 
@@ -53,9 +56,12 @@ export class QuestionController {
    * @param res Fastify response
    */
   @RequirePrivilege(PrivilegeName.VIEW_QUIZ)
-  @Get('answer')
-  async findAllWithAnswer(@Res() res: FastifyReply) {
-    const result = await this.QuestionService.findAllWithAnswer();
+  @Get('answer/:size?')
+  async findAllWithAnswer(
+    @Param('size') size: number,
+    @Res() res: FastifyReply,
+  ) {
+    const result = await this.QuestionService.findAllWithAnswer(size);
     HttpResponseService.sendSuccess<Question[]>(res, HttpStatus.OK, result);
   }
 
