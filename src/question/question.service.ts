@@ -3,9 +3,6 @@ import { QuestionRepository } from './question.repository';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { CountRepository } from '../count/count.repository';
-import { Question, QuestionDocument } from './entities/question.entity';
-import { Model } from 'mongoose';
-import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class QuestionService {
@@ -16,8 +13,6 @@ export class QuestionService {
   constructor(
     private readonly QuestionRepository: QuestionRepository,
     private readonly countRepository: CountRepository,
-    @InjectModel(Question.name)
-    private readonly QuestionModel: Model<QuestionDocument>,
   ) {}
 
   /**
