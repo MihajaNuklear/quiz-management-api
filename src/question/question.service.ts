@@ -88,15 +88,14 @@ export class QuestionService {
  
    * @returns Username Question Number with based name
    */
-  async generatingUsernameQuestion(): Promise<string> {
+  async generatingUsernameQuestion(): Promise<number> {
     let count = 1;
     const countQueue: any | null = await this.countRepository.findOne({});
     const lastCount = countQueue.countQuestionValue;
     count = lastCount === 0 ? 1 : lastCount + 1;
-    const newUsername = `${count.toString().padStart(4, '0')}`;
     await this.countRepository.update(countQueue._id, {
       countQuestionValue: count,
     });
-    return newUsername;
+    return count;
   }
 }
