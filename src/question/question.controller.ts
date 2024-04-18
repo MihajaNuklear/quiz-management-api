@@ -27,7 +27,7 @@ export class QuestionController {
    * @param createQuestionDto Question that will be created
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.CREATE_QUIZ)
+  @RequirePrivilege(PrivilegeName.CREATE_QUESTION)
   @Post()
   async create(
     @Body() createQuestionDto: CreateQuestionDto,
@@ -41,7 +41,7 @@ export class QuestionController {
    * Get all Questions inside database without answer
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.VIEW_QUIZ)
+  @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
   @Get('no-answer/:size?')
   async findAllWithoutAnswer(
     @Param('size') size: number,
@@ -55,7 +55,7 @@ export class QuestionController {
    * Get all Questions inside database
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.VIEW_QUIZ)
+  @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
   @Get('answer/:size?')
   async findAllWithAnswer(
     @Param('size') size: number,
@@ -70,7 +70,7 @@ export class QuestionController {
    * @param id _id of the Question
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.VIEW_QUIZ)
+  @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuestionService.findOne(id);
@@ -83,7 +83,7 @@ export class QuestionController {
    * @param updateQuestionDto update of Question
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.EDIT_QUIZ)
+  @RequirePrivilege(PrivilegeName.EDIT_QUESTION)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -98,7 +98,7 @@ export class QuestionController {
    * @param id _id of Question to be deleted
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.DELETE_QUIZ)
+  @RequirePrivilege(PrivilegeName.DELETE_QUESTION)
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuestionService.remove(id);
