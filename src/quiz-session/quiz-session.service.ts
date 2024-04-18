@@ -6,6 +6,7 @@ import { HistoryService } from '../history/history.service';
 
 import { QuestionResult } from './entities/quiz-session.entity';
 import { QuestionService } from '../question/question.service';
+import path from 'path';
 
 @Injectable()
 export class QuizSessionService {
@@ -16,7 +17,6 @@ export class QuizSessionService {
   constructor(
     private readonly QuizSessionRepository: QuizSessionRepository,
     private readonly questionService: QuestionService,
-    private readonly historyService: HistoryService,
   ) {}
 
   /**
@@ -28,15 +28,17 @@ export class QuizSessionService {
   async create(createQuizSessionDto: CreateQuizSessionDto) {
     const { user, quiz } = createQuizSessionDto;
     await this.updateQuestionAlreadyUsed(quiz);
-    const result = await this.QuizSessionRepository.create(
+    const session = await this.QuizSessionRepository.create(
       createQuizSessionDto,
     );
-    return result;
+    const sessionWithQuestion = await this.QuizSessionRepository.findById(
+      session._id as string,
+    ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
+    return sessionWithQuestion;
   }
 
   /**
    * update Question Already Used
-   * @returns List of all QuizSessions
    */
   async updateQuestionAlreadyUsed(listQuestionResult: QuestionResult[]) {
     const today = new Date();
