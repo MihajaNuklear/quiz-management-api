@@ -1,7 +1,7 @@
 version: '3'
 services:
-  campus-management-api:
-    container_name: campus-management-api
+  quiz-management-api:
+    container_name: quiz-management-api
     build: .
     volumes:
       - /app
