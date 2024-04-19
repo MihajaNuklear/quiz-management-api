@@ -4,6 +4,12 @@ import { CreateQuizSessionDto } from './dto/create-quiz-session.dto';
 import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
 import { QuestionResult } from './entities/quiz-session.entity';
 import { QuestionService } from '../question/question.service';
+import { ListCriteria } from 'src/shared/types/list-criteria.class';
+import { PaginatedQuizSession } from './paginated-quizSession.interface';
+import {
+  QUIZ_SESSIONS_LOOKUP_STAGES,
+  QUIZ_SESSION_SEARCH_FIELDS,
+} from './quiz-session.constant'
 
 @Injectable()
 export class QuizSessionService {
@@ -46,11 +52,31 @@ export class QuizSessionService {
   }
 
   /**
+   * Get paginated Users and list of entity names and user fullNames, based on list criteria
+   * @param criteria criteria used to find Users
+   * @returns Paginated Users
+   */
+  async getPaginated(criteria: ListCriteria): Promise<PaginatedQuizSession> {
+    const paginatedRole = await this.QuizSessionRepository.getByListCriteria(
+      criteria,
+      QUIZ_SESSION_SEARCH_FIELDS,
+      QUIZ_SESSIONS_LOOKUP_STAGES,
+    );
+
+    return {
+      ...paginatedRole,
+      pageNumber: Math.ceil(paginatedRole.totalItems / criteria.pageSize),
+    };
+  }
+
+  /**
    * Get list of all QuizSessions
    * @returns List of all QuizSessions
    */
   async findAll() {
-    const result = await this.QuizSessionRepository.find({}).populate([{ path: 'user' }]);
+    const result = await this.QuizSessionRepository.find({}).populate([
+      { path: 'user' },
+    ]);
     return result;
   }
 

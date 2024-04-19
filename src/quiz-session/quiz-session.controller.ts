@@ -8,6 +8,7 @@ import {
   Delete,
   Res,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { QuizSessionService } from './quiz-session.service';
 import { FastifyReply } from 'fastify';
@@ -17,6 +18,8 @@ import { QuizSession } from './entities/quiz-session.entity';
 import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
 import { PrivilegeName } from '../privilege/entities/privilege.entity';
 import { RequirePrivilege } from '../core/decorators/require-privilege.decorator';
+import { ListCriteria } from 'src/shared/types/list-criteria.class';
+import { PaginatedQuizSession } from './paginated-quizSession.interface';
 
 @Controller('quizSession')
 export class QuizSessionController {
@@ -50,6 +53,21 @@ export class QuizSessionController {
   async findAll(@Res() res: FastifyReply) {
     const result = await this.QuizSessionService.findAll();
     HttpResponseService.sendSuccess<QuizSession[]>(res, HttpStatus.OK, result);
+  }
+
+  @RequirePrivilege(PrivilegeName.VIEW_QUIZ_SESSION)
+  @Get('list')
+  async getPaginated(
+    @Query() queryParams: ListCriteria,
+    @Res() res: FastifyReply,
+  ) {
+    const results: PaginatedQuizSession =
+      await this.QuizSessionService.getPaginated(queryParams);
+    HttpResponseService.sendSuccess<PaginatedQuizSession>(
+      res,
+      HttpStatus.OK,
+      results,
+    );
   }
 
   /**

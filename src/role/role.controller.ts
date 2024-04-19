@@ -52,6 +52,7 @@ export class RoleController {
     type: Role,
     isArray: false,
   })
+  
   @RequirePrivilege(PrivilegeName.VIEW_ROLE)
   @Get('list')
   async getPaginated(
