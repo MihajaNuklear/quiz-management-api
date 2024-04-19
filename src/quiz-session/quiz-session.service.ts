@@ -50,7 +50,7 @@ export class QuizSessionService {
    * @returns List of all QuizSessions
    */
   async findAll() {
-    const result = await this.QuizSessionRepository.find({});
+    const result = await this.QuizSessionRepository.find({}).populate([{ path: 'user' }]);
     return result;
   }
 
