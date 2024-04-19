@@ -9,7 +9,7 @@ import { PaginatedQuizSession } from './paginated-quizSession.interface';
 import {
   QUIZ_SESSIONS_LOOKUP_STAGES,
   QUIZ_SESSION_SEARCH_FIELDS,
-} from './quiz-session.constant'
+} from './quiz-session.constant';
 
 @Injectable()
 export class QuizSessionService {
@@ -87,7 +87,10 @@ export class QuizSessionService {
    */
 
   async findOne(id: string) {
-    const result = await this.QuizSessionRepository.findById(id);
+    const result = (await this.QuizSessionRepository.findById(id)).populate([
+      { path: 'user' },
+      { path: 'quiz',populate:{path:'question'} },
+    ]);
     return result;
   }
 
