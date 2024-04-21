@@ -76,7 +76,7 @@ export class QuestionController {
    * Get paginated  Questions inside database
    * @param res Fastify response
    */
-  
+
   @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
   @Get('list')
   async getPaginated(

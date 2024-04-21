@@ -428,4 +428,58 @@ export const privilegeWithItsGroup = [
     privilege: PrivilegeName.VIEW_SETTING,
     groups: [ADMIN_GROUP],
   },
+
+  {
+    privilege: PrivilegeName.VIEW_QUIZ_SESSION,
+    groups: [
+      ADMIN_GROUP,
+      STUDENT_GROUP,
+      TEACHER_GROUP,
+      TECH_GROUP,
+      GUEST_GROUP,
+    ],
+  },
+  {
+    privilege: PrivilegeName.CREATE_QUIZ_SESSION,
+    groups: [
+      ADMIN_GROUP,
+      STUDENT_GROUP,
+      TEACHER_GROUP,
+      TECH_GROUP,
+      GUEST_GROUP,
+    ],
+  },
+
+  {
+    privilege: PrivilegeName.EDIT_QUIZ_SESSION,
+    groups: [ADMIN_GROUP],
+  },
+  {
+    privilege: PrivilegeName.DELETE_QUIZ_SESSION,
+    groups: [ADMIN_GROUP],
+  },
+
+  {
+    privilege: PrivilegeName.VIEW_QUESTION,
+    groups: [
+      ADMIN_GROUP,
+      STUDENT_GROUP,
+      TEACHER_GROUP,
+      TECH_GROUP,
+      GUEST_GROUP,
+    ],
+  },
+  {
+    privilege: PrivilegeName.CREATE_QUESTION,
+    groups: [ADMIN_GROUP, TEACHER_GROUP],
+  },
+
+  {
+    privilege: PrivilegeName.EDIT_QUESTION,
+    groups: [ADMIN_GROUP],
+  },
+  {
+    privilege: PrivilegeName.DELETE_QUESTION,
+    groups: [ADMIN_GROUP],
+  },
 ];

@@ -62,6 +62,7 @@ import { Count } from '../../count/entities/count.entity';
 import { CountRepository } from '../../count/count.repository';
 import {
   CANDIDATE_BASE_USERNAME,
+  GUEST_BASE_USERNAME,
   STUDENT_BASE_USERNAME,
   TEACHER_BASE_USERNAME,
 } from '../../count/count.constant';
@@ -91,6 +92,8 @@ const candidateToGenerate = 200;
 const studentToGenerate = 500;
 
 const teacherToGenerate = 20;
+
+const guestToGenerate = 3;
 
 const phonePrefixes = [
   '032',
@@ -162,7 +165,7 @@ const createRegistrationPeriod: ScriptFn = async (
 };
 
 /**
- * Create init cursus
+ * Create init Teacher
  * @param dbScriptService
  */
 const createTeacher: ScriptFn = async (DbScriptService: DbScriptService) => {
@@ -267,6 +270,97 @@ const createTeacher: ScriptFn = async (DbScriptService: DbScriptService) => {
   });
 };
 
+/**
+ * Create init Teacher
+ * @param dbScriptService
+ */
+const createGuest: ScriptFn = async (DbScriptService: DbScriptService) => {
+  const userRepository = (await DbScriptService.getRepository(
+    User,
+  )) as UserRepository;
+
+  const groupRepository = (await DbScriptService.getRepository(
+    Group,
+  )) as GroupRepository;
+
+  const roleRepository = (await DbScriptService.getRepository(
+    Role,
+  )) as RoleRepository;
+
+  const countRepository = (await DbScriptService.getRepository(
+    Count,
+  )) as CountRepository;
+
+  const guestGroup: Group = await groupRepository.findOne({
+    name: GUEST_GROUP,
+  });
+
+  const guestRole: any = await roleRepository
+    .findOne({ name: GUEST_ROLE })
+    .populate('privileges');
+
+  const users: any = Array.from(new Array(guestToGenerate), (_, index): any => {
+    const newUsername: string = `${GUEST_BASE_USERNAME}${(index + 1)
+      .toString()
+      .padStart(4, '0')}`;
+
+    const number = faker.random.arrayElement([1, 2]);
+    let phoneNumber;
+
+    if (number === 1) {
+      phoneNumber = [
+        `${faker.random.arrayElement(phonePrefixes)}${faker.datatype.number({
+          min: 1000000,
+          max: 9999999,
+        })}`,
+      ];
+    } else {
+      phoneNumber = [
+        `${faker.random.arrayElement(phonePrefixes)}${faker.datatype.number({
+          min: 1000000,
+          max: 9999999,
+        })}`,
+        `${faker.random.arrayElement(phonePrefixes)}${faker.datatype.number({
+          min: 1000000,
+          max: 9999999,
+        })}`,
+      ];
+    }
+    const user = {
+      firstname: faker.name.firstName(),
+      lastname: faker.name.lastName(),
+      phone: phoneNumber,
+      password: candidatePassword,
+      email: faker.internet.email().toLocaleLowerCase(),
+      creationDate: new Date(),
+      roles: [guestRole._id.toString()],
+      username: newUsername,
+      filters: USER_DEFAULT_FILTERS,
+      address: `${faker.address.streetName()}&&${faker.address.zipCode()}&&${faker.address.city()}`,
+      birthDate: faker.date.between('1995-01-01', '2008-12-31'),
+      birthPlace: faker.address.city(),
+      gender: getRandomGender(),
+      groups: [guestGroup._id.toString()],
+      photo: 'teacher-female-default-pdp.jpg',
+      failedConnectionCount: 0,
+      isActive: true,
+      isDelete: false,
+      createdAt: faker.date.between('2023-01-01', '2024-02-01'),
+      updatedAt: faker.date.between('2023-01-01', '2024-02-01'),
+    };
+    return user;
+  });
+  const usersTab: User[] = [];
+
+  for (let item of users) {
+    usersTab.push(await userRepository.create(item));
+  }
+
+  // const countQueue: any | null = await countRepository.findOne({});
+  // await countRepository.update(countQueue._id, {
+  //   countTeachertValue: teacherToGenerate,
+  // });
+};
 /**
  * Create init EducationnalClasses
  * @param dbScriptService
@@ -1484,7 +1578,12 @@ const createNewRoleCandidate: ScriptFn = async (
     name: STUDENT_GROUP,
   });
 
-  const student_includFilter = ['VIEW_PROFILE', 'EDIT_PROFILE'];
+  const student_includFilter = [
+    'VIEW_PROFILE',
+    'EDIT_PROFILE',
+    PrivilegeName.CREATE_QUIZ_SESSION,
+    PrivilegeName.VIEW_QUIZ_SESSION,
+  ];
 
   const privileges: Privilege[] = await privilegeRepository
     .find({
@@ -1529,7 +1628,12 @@ const createNewRoleStudent: ScriptFn = async (
     name: STUDENT_GROUP,
   });
 
-  const student_includFilter = ['VIEW_PROFILE', 'EDIT_PROFILE'];
+  const student_includFilter = [
+    'VIEW_PROFILE',
+    'EDIT_PROFILE',
+    PrivilegeName.CREATE_QUIZ_SESSION,
+    PrivilegeName.VIEW_QUIZ_SESSION,
+  ];
 
   const privileges: Privilege[] = await privilegeRepository
     .find({
@@ -1565,7 +1669,12 @@ const createNewRoleTechniqueTeam: ScriptFn = async (
     Privilege,
   )) as PrivilegeRepository;
 
-  const tech_includFilter = ['VIEW_USER', 'EDIT_USER'];
+  const tech_includFilter = [
+    'VIEW_USER',
+    'EDIT_USER',
+    PrivilegeName.CREATE_QUIZ_SESSION,
+    PrivilegeName.VIEW_QUIZ_SESSION,
+  ];
 
   const privileges: Privilege[] = await privilegeRepository
     .find({
@@ -1686,6 +1795,9 @@ const createNewRoleTeacher: ScriptFn = async (
     PrivilegeName.DELETE_COMMENT,
 
     PrivilegeName.VIEW_SETTING,
+
+    PrivilegeName.CREATE_QUIZ_SESSION,
+    PrivilegeName.VIEW_QUIZ_SESSION,
   ];
 
   const privileges: Privilege[] = await privilegeRepository
@@ -1811,6 +1923,7 @@ export const scripts: ScriptFn[] = [
   createNewRoleGuest,
   createNewRoleTechniqueTeam,
   createSuperAdminUser,
+  createGuest,
   createTeacher,
   createEducationalClasses,
   createCourseSession,
