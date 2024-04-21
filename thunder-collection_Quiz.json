@@ -2,7 +2,7 @@
     "clientName": "Thunder Client",
     "collectionName": "Quiz",
     "collectionId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-    "dateExported": "2024-04-21T13:49:31.625Z",
+    "dateExported": "2024-04-21T20:03:19.490Z",
     "version": "1.2",
     "folders": [
         {
@@ -78,15 +78,13 @@
             "method": "POST",
             "sortNum": 20000,
             "created": "2024-04-18T17:44:16.660Z",
-            "modified": "2024-04-18T17:44:16.660Z",
+            "modified": "2024-04-21T16:53:20.023Z",
             "headers": [],
-            "params": [],
             "body": {
                 "type": "json",
                 "raw": "{\n  \"login\":\"admin\",\n  \"password\":\"admin\"\n}",
                 "form": []
-            },
-            "tests": []
+            }
         },
         {
             "_id": "e9a00708-bedd-4abe-b817-4ad775860534",
@@ -160,16 +158,16 @@
             "method": "POST",
             "sortNum": 45000,
             "created": "2024-04-18T17:44:16.664Z",
-            "modified": "2024-04-20T21:25:46.519Z",
+            "modified": "2024-04-21T18:45:42.915Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTVjMzkwM2IxYjZhOWIzODU0YTdmIiwiZ3JvdXBzIjpbIjY2MjE1YzM0MDNiMWI2YTliMzg1NDk2NCJdLCJpYXQiOjE3MTM2NDc4MDgsImV4cCI6MTcxMzY4MzgwOH0.oIredjnsE7FxpusGQo_uTANLXuDzW3fgT2pDrI4buuE"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyNTNmZGNiNGNmZTQ2NTg0NTBmY2I0IiwiZ3JvdXBzIjpbIjY2MjUzZmQ3YjRjZmU0NjU4NDUwZmI5MSJdLCJpYXQiOjE3MTM3MTg0MDEsImV4cCI6MTcxMzc1NDQwMX0.zn5p_bvlI4bnCGeGi5CmH36Z_fxHiv3DtM3SdYLmrC4"
                 }
             ],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"user\":\"66215c3903b1b6a9b3854a7f\",\n  \"quiz\" :[\n      {\n        \"question\":\"66229f75d2178db256926ea8\",\n        \"userAnswer\":1\n      },\n       {\n        \"question\":\"66229f75d2178db256926ea8\",\n        \"userAnswer\":0\n      }\n   ]\n}",
+                "raw": "{\n  \"user\":\"66253fe8b4cfe4658450fdcd\",\n  \"quiz\" :[\n      {\n        \"question\":\"66254179d09112a1248ca8df\",\n        \"userAnswer\":2\n      },\n       {\n        \"question\":\"66254179d09112a1248ca8df\",\n        \"userAnswer\":1\n      }\n      ,\n       {\n        \"question\":\"6625418ed09112a1248ca8ff\",\n        \"userAnswer\":1\n      }\n   ]\n}",
                 "form": []
             }
         },
@@ -230,5 +228,5 @@
             ]
         }
     ],
-    "ref": "_krjJPzcB8PkCI2-nGhxxI67Vr2Csgi1tSFXSpxMWncVnIE3il3dXiYARPsrfTQ6JATAKj2fy5VVvK8LTKjDfQ"
+    "ref": "_krjJPzcB8PkCI2-nGhxxI67Vr2Csgi1tSFXSpxMWncveYXQKXE33XoQdb0k3yxRtJw6s1gIJAEYwIWl-IVzUQ"
 }
