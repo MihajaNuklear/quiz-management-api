@@ -3,6 +3,12 @@ import { QuestionRepository } from './question.repository';
 import { CreateQuestionDto } from './dto/create-question.dto';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { CountRepository } from '../count/count.repository';
+import { ListCriteria } from 'src/shared/types/list-criteria.class';
+import { PaginatedQuestion } from './paginated-question.interface';
+import {
+  QUESTION_SEARCH_FIELDS,
+  QUESTIONS_LOOKUP_STAGES,
+} from './question.constant';
 
 @Injectable()
 export class QuestionService {
@@ -53,6 +59,23 @@ export class QuestionService {
   }
 
   /**
+   * Get paginated Questions based on list criteria
+   * @param criteria Criteria used to filter Questions
+   * @returns Paginated Questions, questionNames and questionDescriptions for filter
+   */
+  async getPaginated(criteria: ListCriteria): Promise<PaginatedQuestion> {
+    const paginatedQuestion = await this.QuestionRepository.getByListCriteria(
+      criteria,
+      QUESTION_SEARCH_FIELDS,
+      QUESTIONS_LOOKUP_STAGES,
+    );
+
+    return {
+      ...paginatedQuestion,
+      pageNumber: Math.ceil(paginatedQuestion.totalItems / criteria.pageSize),
+    };
+  }
+  /**
    * Get list of random Questions not already used
    * @returns List of Questions not already used
    */
@@ -69,12 +92,12 @@ export class QuestionService {
     const result = await this.QuestionRepository.find({}).limit(size);
     return result;
   }
+
   /**
    * Find Question with specific id
    * @param id _id of Question
    * @returns Question corresponding to id, otherwise undefined
    */
-
   async findOne(id: string) {
     const result = await this.QuestionRepository.findById(id);
     return result;

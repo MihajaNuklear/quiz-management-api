@@ -8,6 +8,7 @@ import {
   Delete,
   Res,
   HttpStatus,
+  Query,
 } from '@nestjs/common';
 import { QuestionService } from './question.service';
 import { FastifyReply } from 'fastify';
@@ -17,6 +18,8 @@ import { Question } from './entities/question.entity';
 import { UpdateQuestionDto } from './dto/update-question.dto';
 import { PrivilegeName } from '../privilege/entities/privilege.entity';
 import { RequirePrivilege } from '../core/decorators/require-privilege.decorator';
+import { ListCriteria } from 'src/shared/types/list-criteria.class';
+import { PaginatedQuestion } from './paginated-question.interface';
 
 @Controller('question')
 export class QuestionController {
@@ -67,6 +70,27 @@ export class QuestionController {
   ) {
     const result = await this.QuestionService.findAllWithAnswer(size);
     HttpResponseService.sendSuccess<Question[]>(res, HttpStatus.OK, result);
+  }
+
+  /**
+   * Get paginated  Questions inside database
+   * @param res Fastify response
+   */
+  
+  @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
+  @Get('list')
+  async getPaginated(
+    @Query() queryParams: ListCriteria,
+    @Res() res: FastifyReply,
+  ) {
+    const results: PaginatedQuestion = await this.QuestionService.getPaginated(
+      queryParams,
+    );
+    HttpResponseService.sendSuccess<PaginatedQuestion>(
+      res,
+      HttpStatus.OK,
+      results,
+    );
   }
 
   /**
