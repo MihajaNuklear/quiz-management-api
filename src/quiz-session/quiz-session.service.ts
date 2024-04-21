@@ -10,6 +10,8 @@ import {
   QUIZ_SESSIONS_LOOKUP_STAGES,
   QUIZ_SESSION_SEARCH_FIELDS,
 } from './quiz-session.constant';
+import { UserRepository } from '../user/user.repository';
+import { User } from 'src/user/entities/user.entity';
 
 @Injectable()
 export class QuizSessionService {
@@ -20,6 +22,7 @@ export class QuizSessionService {
   constructor(
     private readonly QuizSessionRepository: QuizSessionRepository,
     private readonly questionService: QuestionService,
+    private readonly userRepository: UserRepository,
   ) {}
 
   /**
@@ -30,14 +33,81 @@ export class QuizSessionService {
 
   async create(createQuizSessionDto: CreateQuizSessionDto) {
     const { user, quiz } = createQuizSessionDto;
+
     await this.updateQuestionAlreadyUsed(quiz);
-    const session = await this.QuizSessionRepository.create(
-      createQuizSessionDto,
+
+    const isValidToCreateSession = await this.updateCountUsageEquestion(user);
+
+    if (isValidToCreateSession) {
+      const session = await this.QuizSessionRepository.create(
+        createQuizSessionDto,
+      );
+      const sessionWithCorrection = await this.QuizSessionRepository.findById(
+        session._id as string,
+      ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
+
+      return sessionWithCorrection;
+    }
+    return null;
+  }
+
+  /**
+   * update Question Count Usage Equestio
+   */
+  async updateCountUsageEquestion(userId: string) {
+    const countUsageLimitPerDay = 5;
+    
+    const now = new Date();
+    // const now = new Date('2024-04-23T19:21:11.081+00:00');
+
+    const user: User = await this.userRepository.findById(userId);
+
+    let isValidCount: boolean =
+      user.countUsageEquestion >= countUsageLimitPerDay ? false : true;
+
+    let isSameDate: boolean = this.compareDateWithoutHour(
+      user.dateUsageEquestion,
+      now,
     );
-    const sessionWithCorrection = await this.QuizSessionRepository.findById(
-      session._id as string,
-    ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
-    return sessionWithCorrection;
+
+    if (isSameDate && isValidCount) {
+      await this.userRepository.update(user._id as string, {
+        countUsageEquestion: user.countUsageEquestion + 1,
+        dateUsageEquestion: now,
+      });
+    } else if (isSameDate == false) {
+      await this.userRepository.update(user._id as string, {
+        countUsageEquestion: 1,
+        dateUsageEquestion: now,
+      });
+      isValidCount = true;
+      isSameDate = true;
+    }
+    const isValidToCreateSession: boolean =
+      isValidCount == true && isSameDate == true;
+    // console.log('===============================²');
+    // console.log('isSameDate ', isSameDate);
+    // console.log('isValidCount ', isValidCount);
+    // console.log('isValidToCreateSession ', isValidToCreateSession);
+    // console.log('===============================²');
+
+    return isValidToCreateSession;
+  }
+
+  /**
+   * Compare Date Without Hour
+   */
+
+  compareDateWithoutHour(date1: Date, date2: Date): boolean {
+    const annee1 = date1.getFullYear();
+    const mois1 = date1.getMonth();
+    const jour1 = date1.getDate();
+
+    const annee2 = date2.getFullYear();
+    const mois2 = date2.getMonth();
+    const jour2 = date2.getDate();
+
+    return annee1 === annee2 && mois1 === mois2 && jour1 === jour2;
   }
 
   /**
@@ -89,7 +159,7 @@ export class QuizSessionService {
   async findOne(id: string) {
     const result = (await this.QuizSessionRepository.findById(id)).populate([
       { path: 'user' },
-      { path: 'quiz',populate:{path:'question'} },
+      { path: 'quiz', populate: { path: 'question' } },
     ]);
     return result;
   }

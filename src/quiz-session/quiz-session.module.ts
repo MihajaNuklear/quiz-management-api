@@ -7,6 +7,7 @@ import { QuizSessionService } from './quiz-session.service';
 import { PrivilegeModule } from '../privilege/privilege.module';
 import { HistoryModule } from '../history/history.module';
 import { QuestionModule } from '../question/question.module';
+import { UserModule } from '../user/user.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { QuestionModule } from '../question/question.module';
     PrivilegeModule,
     HistoryModule,
     QuestionModule,
+    UserModule
   ],
   controllers: [QuizSessionController],
   providers: [QuizSessionService, QuizSessionRepository],

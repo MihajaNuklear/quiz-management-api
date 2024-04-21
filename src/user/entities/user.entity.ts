@@ -174,6 +174,17 @@ export class User {
    */
   @Prop({ type: Boolean, default: false, required: true })
   isDelete: boolean;
+
+  /**
+   * Determine if coun Usage Equestion
+   */
+  @Prop({ type: Number })
+  countUsageEquestion?: number;
+  /**
+   * Determine if date Usage Equestion
+   */
+  @Prop({ type: Date })
+  dateUsageEquestion?: Date;
 }
 
 /**

@@ -42,6 +42,6 @@ import { HistoryModule } from '../history/history.module';
       useClass: AuthService,
     },
   ],
-  exports: [UserService],
+  exports: [UserService,UserRepository],
 })
 export class UserModule { }
