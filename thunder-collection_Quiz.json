@@ -1,232 +1,186 @@
 {
-    "clientName": "Thunder Client",
+    "client": "Thunder Client",
     "collectionName": "Quiz",
-    "collectionId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-    "dateExported": "2024-04-21T20:03:19.490Z",
-    "version": "1.2",
+    "dateExported": "2024-04-18T13:55:24.017Z",
+    "version": "1.1",
     "folders": [
         {
-            "_id": "cfda50c9-00bd-40ec-84a6-a5edd88f533f",
+            "_id": "615c6d3b-4308-4cc0-badf-248f52f35d3e",
             "name": "backend",
             "containerId": "",
-            "created": "2024-04-18T17:44:16.659Z",
+            "created": "2024-04-18T10:21:11.575Z",
             "sortNum": 10000
         },
         {
-            "_id": "58d4942b-3cc8-4060-8404-ff62e4b99b25",
+            "_id": "31b0373c-93f4-4b1c-b20c-5ad5485c86d1",
             "name": "user",
-            "containerId": "cfda50c9-00bd-40ec-84a6-a5edd88f533f",
-            "created": "2024-04-18T17:44:16.660Z",
+            "containerId": "615c6d3b-4308-4cc0-badf-248f52f35d3e",
+            "created": "2024-04-18T10:21:11.576Z",
             "sortNum": 20000
         },
         {
-            "_id": "b48cbd0c-fd47-4f58-8070-2d79be60d632",
+            "_id": "da796f64-4f4a-49b5-9891-a64e20921da4",
             "name": "question",
-            "containerId": "cfda50c9-00bd-40ec-84a6-a5edd88f533f",
-            "created": "2024-04-18T17:44:16.661Z",
+            "containerId": "615c6d3b-4308-4cc0-badf-248f52f35d3e",
+            "created": "2024-04-18T10:21:11.577Z",
             "sortNum": 30000
         },
         {
-            "_id": "7ef822d7-14bc-4005-89f0-3d6d452b31bb",
+            "_id": "31c2d514-f7d3-47cb-8319-82195c614d93",
             "name": "quizSession",
-            "containerId": "cfda50c9-00bd-40ec-84a6-a5edd88f533f",
-            "created": "2024-04-18T17:44:16.662Z",
+            "containerId": "615c6d3b-4308-4cc0-badf-248f52f35d3e",
+            "created": "2024-04-18T10:21:11.578Z",
             "sortNum": 40000
         }
     ],
     "requests": [
         {
-            "_id": "c5b3f31c-bc6e-40f5-87f7-52dffca40fa7",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "58d4942b-3cc8-4060-8404-ff62e4b99b25",
-            "name": "get one",
-            "url": "",
-            "method": "GET",
-            "sortNum": 10000,
-            "created": "2024-04-20T11:01:25.174Z",
-            "modified": "2024-04-20T11:01:25.174Z",
-            "headers": []
-        },
-        {
-            "_id": "b0012448-b483-4af3-ac58-a935a1889482",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "b48cbd0c-fd47-4f58-8070-2d79be60d632",
+            "_id": "1d47b404-a8fb-40d4-9299-5ff2c5dacd8b",
+            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
+            "containerId": "da796f64-4f4a-49b5-9891-a64e20921da4",
             "name": "post",
             "url": "http://localhost:3000/question",
             "method": "POST",
             "sortNum": 17500,
-            "created": "2024-04-18T17:44:16.661Z",
-            "modified": "2024-04-19T16:44:36.161Z",
+            "created": "2024-04-18T10:21:11.576Z",
+            "modified": "2024-04-18T12:12:52.762Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTVjMzkwM2IxYjZhOWIzODU0YTdmIiwiZ3JvdXBzIjpbIjY2MjE1YzM0MDNiMWI2YTliMzg1NDk2NCJdLCJpYXQiOjE3MTM1NDUwNTIsImV4cCI6MTcxMzU4MTA1Mn0.nBIQ85mv7nGtnHtqhYv1ZUPBLwKFHa2jlkjkfbymwnA"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTBkZWQ1N2YyMzQ0MTJhNmU2ZmNhIiwiZ3JvdXBzIjpbIjY2MjEwZGVkNTdmMjM0NDEyYTZlNmVhZiJdLCJpYXQiOjE3MTM0NDIzNDgsImV4cCI6MTcxMzQ3ODM0OH0.zokSPGGeYzKW96HwhOdttSJVVX7Xa9q-LrSAKxfhF7s"
                 }
             ],
+            "params": [],
             "body": {
                 "type": "json",
                 "raw": "{\n  \"questionAsked\":\"what 3?\",\n  \"choice\":[\"z\"],\n  \"trueAnswer\":0\n}",
                 "form": []
-            }
+            },
+            "tests": []
         },
         {
-            "_id": "eecfb069-8814-4c54-93d7-3dd7b0c4af9a",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "58d4942b-3cc8-4060-8404-ff62e4b99b25",
+            "_id": "e718400a-04f2-43d4-9938-fbf7cb3bebbd",
+            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
+            "containerId": "31b0373c-93f4-4b1c-b20c-5ad5485c86d1",
             "name": "login",
             "url": "http://localhost:3000/authentication/login",
             "method": "POST",
             "sortNum": 20000,
-            "created": "2024-04-18T17:44:16.660Z",
-            "modified": "2024-04-21T16:53:20.023Z",
+            "created": "2024-04-18T10:21:11.575Z",
+            "modified": "2024-04-18T10:21:11.575Z",
             "headers": [],
+            "params": [],
             "body": {
                 "type": "json",
                 "raw": "{\n  \"login\":\"admin\",\n  \"password\":\"admin\"\n}",
                 "form": []
-            }
+            },
+            "tests": []
         },
         {
-            "_id": "e9a00708-bedd-4abe-b817-4ad775860534",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "b48cbd0c-fd47-4f58-8070-2d79be60d632",
-            "name": "paginated",
-            "url": "http://localhost:3000/question/list?page=1&pageSize=5",
-            "method": "GET",
-            "sortNum": 21875,
-            "created": "2024-04-21T13:47:12.880Z",
-            "modified": "2024-04-21T13:48:40.933Z",
-            "headers": [
-                {
-                    "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTVjMzkwM2IxYjZhOWIzODU0YTdmIiwiZ3JvdXBzIjpbIjY2MjE1YzM0MDNiMWI2YTliMzg1NDk2NCJdLCJpYXQiOjE3MTM3MDcyNjUsImV4cCI6MTcxMzc0MzI2NX0.UrpHOKgAthVQ_TgZTxPrCvFvu3cxEHNnMD1SFJ_mVPs"
-                }
-            ],
-            "params": [
-                {
-                    "name": "page",
-                    "value": "1",
-                    "isPath": false
-                },
-                {
-                    "name": "pageSize",
-                    "value": "5",
-                    "isPath": false
-                }
-            ]
-        },
-        {
-            "_id": "892a4066-bbb2-4b66-a482-72f9ac134033",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "b48cbd0c-fd47-4f58-8070-2d79be60d632",
+            "_id": "62e3cc99-1935-4f2b-9c9d-a2c3d50b2742",
+            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
+            "containerId": "da796f64-4f4a-49b5-9891-a64e20921da4",
             "name": "get  without answer ",
             "url": "http://localhost:3000/question/no-answer/0",
             "method": "GET",
             "sortNum": 26250,
-            "created": "2024-04-18T17:44:16.663Z",
-            "modified": "2024-04-18T19:06:56.992Z",
+            "created": "2024-04-18T10:21:11.578Z",
+            "modified": "2024-04-18T12:18:49.083Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTVjMzkwM2IxYjZhOWIzODU0YTdmIiwiZ3JvdXBzIjpbIjY2MjE1YzM0MDNiMWI2YTliMzg1NDk2NCJdLCJpYXQiOjE3MTM0NjcxODIsImV4cCI6MTcxMzUwMzE4Mn0.VNFIgw1qDHOdArYlHeR7MKtZuI7tJUB69nJSLfN5MYE"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTBkZWQ1N2YyMzQ0MTJhNmU2ZmNhIiwiZ3JvdXBzIjpbIjY2MjEwZGVkNTdmMjM0NDEyYTZlNmVhZiJdLCJpYXQiOjE3MTM0NDIzNDgsImV4cCI6MTcxMzQ3ODM0OH0.zokSPGGeYzKW96HwhOdttSJVVX7Xa9q-LrSAKxfhF7s"
                 }
-            ]
+            ],
+            "params": [],
+            "tests": []
         },
         {
-            "_id": "843aca52-a5fe-4005-bb99-8fb07291c025",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "b48cbd0c-fd47-4f58-8070-2d79be60d632",
+            "_id": "f5e68ae9-e8a4-4450-a5ab-ae0c12aa0068",
+            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
+            "containerId": "da796f64-4f4a-49b5-9891-a64e20921da4",
             "name": "get  with answer",
             "url": "http://localhost:3000/question/answer",
             "method": "GET",
             "sortNum": 35000,
-            "created": "2024-04-18T17:44:16.662Z",
-            "modified": "2024-04-18T19:07:02.865Z",
+            "created": "2024-04-18T10:21:11.577Z",
+            "modified": "2024-04-18T10:21:11.577Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTVjMzkwM2IxYjZhOWIzODU0YTdmIiwiZ3JvdXBzIjpbIjY2MjE1YzM0MDNiMWI2YTliMzg1NDk2NCJdLCJpYXQiOjE3MTM0NjcxODIsImV4cCI6MTcxMzUwMzE4Mn0.VNFIgw1qDHOdArYlHeR7MKtZuI7tJUB69nJSLfN5MYE"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYxZmM1Y2U3OTc2OTdmYTU4YWFhZjE3IiwiZ3JvdXBzIjpbIjY2MWZjNWNlNzk3Njk3ZmE1OGFhYWUwNCJdLCJpYXQiOjE3MTM0MTk0MDYsImV4cCI6MTcxMzQ1NTQwNn0.YaKnDGo-lv1XX-Qsr9LtXS1W_XkfDeXbOFXYyUjYFmM"
                 }
-            ]
+            ],
+            "params": [],
+            "tests": []
         },
         {
-            "_id": "190e0cd4-1e5d-4160-89a4-b16e7fc70176",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "7ef822d7-14bc-4005-89f0-3d6d452b31bb",
+            "_id": "26e5df46-7a46-4f5e-aaf2-33164c67e8dd",
+            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
+            "containerId": "31c2d514-f7d3-47cb-8319-82195c614d93",
             "name": "post",
             "url": "http://localhost:3000/quizSession",
             "method": "POST",
             "sortNum": 45000,
-            "created": "2024-04-18T17:44:16.664Z",
-            "modified": "2024-04-21T18:45:42.915Z",
+            "created": "2024-04-18T10:21:11.579Z",
+            "modified": "2024-04-18T10:21:11.579Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyNTNmZGNiNGNmZTQ2NTg0NTBmY2I0IiwiZ3JvdXBzIjpbIjY2MjUzZmQ3YjRjZmU0NjU4NDUwZmI5MSJdLCJpYXQiOjE3MTM3MTg0MDEsImV4cCI6MTcxMzc1NDQwMX0.zn5p_bvlI4bnCGeGi5CmH36Z_fxHiv3DtM3SdYLmrC4"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMGUxMDRlM2EwMTBlOGE2MjA5MmJjIiwiZ3JvdXBzIjpbIjY2MjBlMTA0ZTNhMDEwZThhNjIwOTFhMSJdLCJpYXQiOjE3MTM0MzA4NTAsImV4cCI6MTcxMzQ2Njg1MH0.Zmyl_s0PRQZhT-OXG5-AIwGYQwO380tS9_giPUd-Pm4"
                 }
             ],
+            "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"user\":\"66253fe8b4cfe4658450fdcd\",\n  \"quiz\" :[\n      {\n        \"question\":\"66254179d09112a1248ca8df\",\n        \"userAnswer\":2\n      },\n       {\n        \"question\":\"66254179d09112a1248ca8df\",\n        \"userAnswer\":1\n      }\n      ,\n       {\n        \"question\":\"6625418ed09112a1248ca8ff\",\n        \"userAnswer\":1\n      }\n   ]\n}",
+                "raw": "{\n  \"user\":\"6620d2ff429af750b7314b2e\",\n  \"quiz\" :[\n      {\n        \"question\":\"6620e14fdce29582f4debcb7\",\n        \"userAnswer\":1\n      },\n       {\n        \"question\":\"6620e151dce29582f4debcc9\",\n        \"userAnswer\":2\n      }\n   ]\n}",
                 "form": []
-            }
+            },
+            "tests": []
         },
         {
-            "_id": "c1821b0b-7059-4fd8-ac8c-ff8466a6795a",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "7ef822d7-14bc-4005-89f0-3d6d452b31bb",
+            "_id": "83a622b5-8c2f-4d67-82be-800d2dafc7e8",
+            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
+            "containerId": "31c2d514-f7d3-47cb-8319-82195c614d93",
             "name": "get",
             "url": "http://localhost:3000/quizSession",
             "method": "GET",
             "sortNum": 55000,
-            "created": "2024-04-18T17:44:16.665Z",
-            "modified": "2024-04-19T16:47:13.172Z",
+            "created": "2024-04-18T10:21:11.580Z",
+            "modified": "2024-04-18T10:21:11.580Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTVjMzkwM2IxYjZhOWIzODU0YTdmIiwiZ3JvdXBzIjpbIjY2MjE1YzM0MDNiMWI2YTliMzg1NDk2NCJdLCJpYXQiOjE3MTM1NDUwNTIsImV4cCI6MTcxMzU4MTA1Mn0.nBIQ85mv7nGtnHtqhYv1ZUPBLwKFHa2jlkjkfbymwnA"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMGRlMDUwZGJiZTVhYTM4OGZhMGM1IiwiZ3JvdXBzIjpbIjY2MjBkZTA0MGRiYmU1YWEzODhmOWZhYSJdLCJpYXQiOjE3MTM0MzAwODMsImV4cCI6MTcxMzQ2NjA4M30.Q40liVR01o3u1wSYgp7mmXUTG0l0PIfWOqe4tU2qw1w"
                 }
-            ]
+            ],
+            "params": [],
+            "tests": []
         },
         {
-            "_id": "2c88f919-5c4e-4165-8958-2462dae3f97e",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "b48cbd0c-fd47-4f58-8070-2d79be60d632",
+            "_id": "bc2a1c9a-7819-490e-99d4-bdc71301d01e",
+            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
+            "containerId": "da796f64-4f4a-49b5-9891-a64e20921da4",
             "name": "patch",
             "url": "http://localhost:3000/question/6620de583b0315f29e813064",
             "method": "PATCH",
             "sortNum": 65000,
-            "created": "2024-04-18T17:44:16.666Z",
-            "modified": "2024-04-18T19:07:09.173Z",
+            "created": "2024-04-18T10:21:11.581Z",
+            "modified": "2024-04-18T10:21:11.581Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTVjMzkwM2IxYjZhOWIzODU0YTdmIiwiZ3JvdXBzIjpbIjY2MjE1YzM0MDNiMWI2YTliMzg1NDk2NCJdLCJpYXQiOjE3MTM0NjcxODIsImV4cCI6MTcxMzUwMzE4Mn0.VNFIgw1qDHOdArYlHeR7MKtZuI7tJUB69nJSLfN5MYE"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMGRlMDUwZGJiZTVhYTM4OGZhMGM1IiwiZ3JvdXBzIjpbIjY2MjBkZTA0MGRiYmU1YWEzODhmOWZhYSJdLCJpYXQiOjE3MTM0MzAwODMsImV4cCI6MTcxMzQ2NjA4M30.Q40liVR01o3u1wSYgp7mmXUTG0l0PIfWOqe4tU2qw1w"
                 }
             ],
+            "params": [],
             "body": {
                 "type": "json",
                 "raw": "{\n \"wasUsedTime\" :\"utilisé\"\n}",
                 "form": []
-            }
-        },
-        {
-            "_id": "53654a6a-a1f0-470c-960d-b4a8c824de3b",
-            "colId": "c75daa61-ea53-4b90-87cc-b21397ee7420",
-            "containerId": "7ef822d7-14bc-4005-89f0-3d6d452b31bb",
-            "name": "get one",
-            "url": "http://localhost:3000/quizSession/66229fc5d2178db256926ecc",
-            "method": "GET",
-            "sortNum": 75000,
-            "created": "2024-04-19T16:41:54.219Z",
-            "modified": "2024-04-19T16:47:35.334Z",
-            "headers": [
-                {
-                    "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTVjMzkwM2IxYjZhOWIzODU0YTdmIiwiZ3JvdXBzIjpbIjY2MjE1YzM0MDNiMWI2YTliMzg1NDk2NCJdLCJpYXQiOjE3MTM1NDUwNTIsImV4cCI6MTcxMzU4MTA1Mn0.nBIQ85mv7nGtnHtqhYv1ZUPBLwKFHa2jlkjkfbymwnA"
-                }
-            ]
+            },
+            "tests": []
         }
-    ],
-    "ref": "_krjJPzcB8PkCI2-nGhxxI67Vr2Csgi1tSFXSpxMWncveYXQKXE33XoQdb0k3yxRtJw6s1gIJAEYwIWl-IVzUQ"
+    ]
 }
