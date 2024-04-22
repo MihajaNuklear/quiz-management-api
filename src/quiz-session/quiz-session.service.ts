@@ -56,7 +56,7 @@ export class QuizSessionService {
    */
   async updateCountUsageEquestion(userId: string) {
     const countUsageLimitPerDay = 5;
-    
+
     const now = new Date();
     // const now = new Date('2024-04-23T19:21:11.081+00:00');
 
@@ -99,6 +99,9 @@ export class QuizSessionService {
    */
 
   compareDateWithoutHour(date1: Date, date2: Date): boolean {
+    if (date1 == undefined || date1 == null) {
+      return false;
+    }
     const annee1 = date1.getFullYear();
     const mois1 = date1.getMonth();
     const jour1 = date1.getDate();
