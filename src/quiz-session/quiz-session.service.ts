@@ -32,66 +32,19 @@ export class QuizSessionService {
    */
 
   async create(createQuizSessionDto: CreateQuizSessionDto) {
-    const { user, quiz } = createQuizSessionDto;
+    const { quiz } = createQuizSessionDto;
 
     await this.updateQuestionAlreadyUsed(quiz);
 
-    const isValidToCreateSession = await this.updateCountUsageEquestion(user);
-
-    if (isValidToCreateSession) {
-      const session = await this.QuizSessionRepository.create(
-        createQuizSessionDto,
-      );
-      const sessionWithCorrection = await this.QuizSessionRepository.findById(
-        session._id as string,
-      ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
-
-      return sessionWithCorrection;
-    }
-    return null;
-  }
-
-  /**
-   * update Question Count Usage Equestio
-   */
-  async updateCountUsageEquestion(userId: string) {
-    const countUsageLimitPerDay = 5;
-
-    const now = new Date();
-    // const now = new Date('2024-04-23T19:21:11.081+00:00');
-
-    const user: User = await this.userRepository.findById(userId);
-
-    let isValidCount: boolean =
-      user.countUsageEquestion >= countUsageLimitPerDay ? false : true;
-
-    let isSameDate: boolean = this.compareDateWithoutHour(
-      user.dateUsageEquestion,
-      now,
+    const session = await this.QuizSessionRepository.create(
+      createQuizSessionDto,
     );
+    
+    const sessionWithCorrection = await this.QuizSessionRepository.findById(
+      session._id as string,
+    ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
 
-    if (isSameDate && isValidCount) {
-      await this.userRepository.update(user._id as string, {
-        countUsageEquestion: user.countUsageEquestion + 1,
-        dateUsageEquestion: now,
-      });
-    } else if (isSameDate == false) {
-      await this.userRepository.update(user._id as string, {
-        countUsageEquestion: 1,
-        dateUsageEquestion: now,
-      });
-      isValidCount = true;
-      isSameDate = true;
-    }
-    const isValidToCreateSession: boolean =
-      isValidCount == true && isSameDate == true;
-    // console.log('===============================²');
-    // console.log('isSameDate ', isSameDate);
-    // console.log('isValidCount ', isValidCount);
-    // console.log('isValidToCreateSession ', isValidToCreateSession);
-    // console.log('===============================²');
-
-    return isValidToCreateSession;
+    return sessionWithCorrection;
   }
 
   /**
