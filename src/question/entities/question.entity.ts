@@ -1,6 +1,19 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import mongoose, { HydratedDocument, Types } from 'mongoose';
 
+/**
+ * result
+ */
+@Schema()
+export class Choice {
+  @Prop({ type: String })
+  _id ?: string;
+
+  @Prop({ type: String })
+  choiceValue: string;
+}
+
+const choiceSchema = SchemaFactory.createForClass(Choice);
 /**
  * Represents a Question
  */
@@ -26,14 +39,14 @@ export class Question {
   /**
    * question choice
    */
-  @Prop({ type: [String] })
-  choice: string[];
+  @Prop({ type: [choiceSchema] })
+  choice: Choice[];
 
   /**
    * question trueAnswer
    */
-  @Prop({ type: Number })
-  trueAnswer: number;
+  @Prop({ type: String })
+  trueAnswer: string;
 
   /**
    * question was used date

@@ -19,7 +19,6 @@ const questionResultSchema = SchemaFactory.createForClass(QuestionResult);
 export class QuizSession {
   _id: string | Types.ObjectId;
 
-
   @Prop({ type: [questionResultSchema], required: false })
   quiz: QuestionResult[];
 }
