@@ -114,7 +114,6 @@ export class QuizSessionService {
 
   async findOne(id: string) {
     const result = (await this.QuizSessionRepository.findById(id)).populate([
-      { path: 'user' },
       { path: 'quiz', populate: { path: 'question' } },
     ]);
     return result;

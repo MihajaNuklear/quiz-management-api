@@ -9,8 +9,8 @@ export class QuestionResult {
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Question' })
   question: string | Types.ObjectId;
 
-  @Prop({ type: Number })
-  userAnswer: number;
+  @Prop({ type: String })
+  userAnswer: string;
 }
 
 const questionResultSchema = SchemaFactory.createForClass(QuestionResult);
