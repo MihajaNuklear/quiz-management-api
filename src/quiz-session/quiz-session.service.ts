@@ -32,38 +32,24 @@ export class QuizSessionService {
    */
 
   async create(createQuizSessionDto: CreateQuizSessionDto) {
-    const { quiz } = createQuizSessionDto;
+    const questionResult: QuestionResult[] = createQuizSessionDto.quiz;
 
-    await this.updateQuestionAlreadyUsed(quiz);
+    console.log('=============================');
+    console.log(createQuizSessionDto);
+    console.log('=============================');
 
-    const session = await this.QuizSessionRepository.create(
-      createQuizSessionDto,
-    );
-    
-    const sessionWithCorrection = await this.QuizSessionRepository.findById(
-      session._id as string,
-    ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
+    await this.updateQuestionAlreadyUsed(questionResult);
 
-    return sessionWithCorrection;
-  }
+    // const session = await this.QuizSessionRepository.create(
+    //   createQuizSessionDto,
+    // );
 
-  /**
-   * Compare Date Without Hour
-   */
+    // const sessionWithCorrection = await this.QuizSessionRepository.findById(
+    //   session._id as string,
+    // ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
 
-  compareDateWithoutHour(date1: Date, date2: Date): boolean {
-    if (date1 == undefined || date1 == null) {
-      return false;
-    }
-    const annee1 = date1.getFullYear();
-    const mois1 = date1.getMonth();
-    const jour1 = date1.getDate();
-
-    const annee2 = date2.getFullYear();
-    const mois2 = date2.getMonth();
-    const jour2 = date2.getDate();
-
-    return annee1 === annee2 && mois1 === mois2 && jour1 === jour2;
+    // return sessionWithCorrection;
+    return null;
   }
 
   /**
