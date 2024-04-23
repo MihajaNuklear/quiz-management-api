@@ -9,6 +9,7 @@ import {
   QUESTION_SEARCH_FIELDS,
   QUESTIONS_LOOKUP_STAGES,
 } from './question.constant';
+import { QuestionCriteria } from './question.controller';
 
 @Injectable()
 export class QuestionService {
@@ -40,10 +41,9 @@ export class QuestionService {
    * Get list of all Questions
    * @returns List of all Questions
    */
-  // async findAllWithoutAnswer(unusedSince: number, size: number) {
-  async findAllWithoutAnswer(criteria: { unusedSince: number; size: number }) {
+  async findAllWithoutAnswer(criteria: QuestionCriteria) {
     const limitDate = new Date(Date.now() - criteria.unusedSince * 1000);
-    
+
     const questionsWithoutAnswer = await this.QuestionRepository.find({
       $or: [
         { wasUsedDate: { $lt: limitDate } },

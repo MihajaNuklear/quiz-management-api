@@ -21,6 +21,10 @@ import { RequirePrivilege } from '../core/decorators/require-privilege.decorator
 import { ListCriteria } from 'src/shared/types/list-criteria.class';
 import { PaginatedQuestion } from './paginated-question.interface';
 
+export interface QuestionCriteria {
+  unusedSince: number;
+  size: number;
+}
 @Controller('question')
 export class QuestionController {
   constructor(private readonly QuestionService: QuestionService) {}
@@ -47,7 +51,7 @@ export class QuestionController {
   @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
   @Get('no-answer')
   async findAllWithoutAnswer(
-    @Query() queryParams: { unusedSince: number; size: number },
+    @Query() queryParams: QuestionCriteria,
     @Res() res: FastifyReply,
   ) {
     const { unusedSince = 0, size = 50 } = queryParams;
