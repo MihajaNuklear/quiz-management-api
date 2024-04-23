@@ -40,8 +40,10 @@ export class QuestionService {
    * Get list of all Questions
    * @returns List of all Questions
    */
-  async findAllWithoutAnswer(unusedSince: number, size: number) {
-    const limitDate = new Date(Date.now() - unusedSince * 1000);
+  // async findAllWithoutAnswer(unusedSince: number, size: number) {
+  async findAllWithoutAnswer(criteria: { unusedSince: number; size: number }) {
+    const limitDate = new Date(Date.now() - criteria.unusedSince * 1000);
+    
     const questionsWithoutAnswer = await this.QuestionRepository.find({
       $or: [
         { wasUsedDate: { $lt: limitDate } },
@@ -53,7 +55,7 @@ export class QuestionService {
 
     const selectedQuestions = this.getRandomQuestions(
       questionsWithoutAnswer,
-      size,
+      criteria.size,
     );
     return selectedQuestions;
   }

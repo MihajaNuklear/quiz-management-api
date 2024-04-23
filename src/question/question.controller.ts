@@ -45,16 +45,17 @@ export class QuestionController {
    * @param res Fastify response
    */
   @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
-  @Get('no-answer/:unusedSince/:size?')
+  @Get('no-answer')
   async findAllWithoutAnswer(
-    @Param('unusedSince') unusedSince: number,
-    @Param('size') size: number,
+    @Query() queryParams: { unusedSince: number; size: number },
     @Res() res: FastifyReply,
   ) {
-    const result: any = await this.QuestionService.findAllWithoutAnswer(
+    const { unusedSince = 0, size = 50 } = queryParams;
+
+    const result: any = await this.QuestionService.findAllWithoutAnswer({
       unusedSince,
       size,
-    );
+    });
     HttpResponseService.sendSuccess<Question[]>(res, HttpStatus.OK, result);
   }
 
