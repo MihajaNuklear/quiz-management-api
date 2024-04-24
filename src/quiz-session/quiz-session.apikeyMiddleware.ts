@@ -12,7 +12,7 @@ export class ApiKeyMiddleware implements NestMiddleware {
   use(req: Request, res: FastifyReply, next: NextFunction) {
     const apiKey = req.headers['user-api-key'];
     if (!apiKey || apiKey !== env.get('APP_API_QUIZ').asString()) {
-        HttpErrorUnauthorizedFactory.create(res,'Unauthorized Ressources')
+      HttpErrorUnauthorizedFactory.create(res, 'Unauthorized Ressources');
     }
     next();
   }

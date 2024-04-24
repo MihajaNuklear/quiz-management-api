@@ -34,7 +34,7 @@ export class QuestionController {
    * @param createQuestionDto Question that will be created
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.CREATE_QUESTION)
+
   @Post()
   async create(
     @Body() createQuestionDto: CreateQuestionDto,
@@ -48,7 +48,7 @@ export class QuestionController {
    * Get all Questions inside database without answer
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
+
   @Get('no-answer')
   async findAllWithoutAnswer(
     @Query() queryParams: QuestionCriteria,
@@ -67,7 +67,7 @@ export class QuestionController {
    * Get all Questions inside database
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
+
   @Get('answer/:size?')
   async findAllWithAnswer(
     @Param('size') size: number,
@@ -82,7 +82,6 @@ export class QuestionController {
    * @param res Fastify response
    */
 
-  @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
   @Get('list')
   async getPaginated(
     @Query() queryParams: ListCriteria,
@@ -103,7 +102,7 @@ export class QuestionController {
    * @param id _id of the Question
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.VIEW_QUESTION)
+
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuestionService.findOne(id);
