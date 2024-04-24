@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, NestModule ,MiddlewareConsumer} from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { QuizSession, QuizSessionSchema } from './entities/quiz-session.entity';
 import { QuizSessionController } from './quiz-session.controller';
@@ -8,6 +8,7 @@ import { PrivilegeModule } from '../privilege/privilege.module';
 import { HistoryModule } from '../history/history.module';
 import { QuestionModule } from '../question/question.module';
 import { UserModule } from '../user/user.module';
+import { ApiKeyMiddleware } from './quiz-session.apikeyMiddleware';
 
 @Module({
   imports: [
@@ -23,4 +24,10 @@ import { UserModule } from '../user/user.module';
   providers: [QuizSessionService, QuizSessionRepository],
   exports: [QuizSessionRepository, QuizSessionService],
 })
-export class QuizSessionModule {}
+
+export class QuizSessionModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(ApiKeyMiddleware).forRoutes('quizSession')
+  }
+}

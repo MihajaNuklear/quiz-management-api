@@ -30,7 +30,6 @@ export class QuizSessionController {
    * @param createQuizSessionDto QuizSession that will be created
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.CREATE_QUIZ_SESSION)
   @Post()
   async create(
     @Body() createQuizSessionDto: CreateQuizSessionDto,
@@ -48,14 +47,11 @@ export class QuizSessionController {
    * Get all QuizSessions inside database
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.VIEW_QUIZ_SESSION)
   @Get()
   async findAll(@Res() res: FastifyReply) {
     const result = await this.QuizSessionService.findAll();
     HttpResponseService.sendSuccess<QuizSession[]>(res, HttpStatus.OK, result);
   }
-
-  @RequirePrivilege(PrivilegeName.VIEW_QUIZ_SESSION)
   @Get('list')
   async getPaginated(
     @Query() queryParams: ListCriteria,
@@ -75,7 +71,6 @@ export class QuizSessionController {
    * @param id _id of the QuizSession
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.VIEW_QUIZ_SESSION)
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuizSessionService.findOne(id);
@@ -88,7 +83,7 @@ export class QuizSessionController {
    * @param updateQuizSessionDto update of QuizSession
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.EDIT_QUIZ_SESSION)
+
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -106,7 +101,7 @@ export class QuizSessionController {
    * @param id _id of QuizSession to be deleted
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.DELETE_QUIZ_SESSION)
+
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuizSessionService.remove(id);

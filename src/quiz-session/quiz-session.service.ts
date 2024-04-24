@@ -10,10 +10,7 @@ import {
   QUIZ_SESSIONS_LOOKUP_STAGES,
   QUIZ_SESSION_SEARCH_FIELDS,
 } from './quiz-session.constant';
-import { UserRepository } from '../user/user.repository';
-import { User } from 'src/user/entities/user.entity';
 import { QuestionRepository } from '../question/question.repository';
-import { Question } from '../question/entities/question.entity';
 
 @Injectable()
 export class QuizSessionService {
@@ -25,7 +22,7 @@ export class QuizSessionService {
     private readonly QuizSessionRepository: QuizSessionRepository,
     private readonly questionService: QuestionService,
     private readonly questionRepository: QuestionRepository,
-    private readonly userRepository: UserRepository,
+
   ) {}
 
   /**
@@ -96,6 +93,7 @@ export class QuizSessionService {
    * @param criteria criteria used to find Users
    * @returns Paginated Users
    */
+
   async getPaginated(criteria: ListCriteria): Promise<PaginatedQuizSession> {
     const paginatedRole = await this.QuizSessionRepository.getByListCriteria(
       criteria,
