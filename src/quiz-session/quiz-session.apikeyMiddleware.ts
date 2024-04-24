@@ -10,8 +10,17 @@ dotenv.config({ path: '.env' });
 @Injectable()
 export class ApiKeyMiddleware implements NestMiddleware {
   use(req: Request, res: FastifyReply, next: NextFunction) {
-    const apiKey = req.headers['user-api-key'];
-    if (!apiKey || apiKey !== env.get('APP_API_QUIZ').asString()) {
+    const bearerApiKey = req.headers.authorization;
+    console.log('============================');
+    console.log(bearerApiKey);
+    console.log('============================');
+    if (!bearerApiKey || !bearerApiKey.startsWith('Bearer ')) {
+      HttpErrorUnauthorizedFactory.create(res, 'Unauthorized Ressources');
+    }
+    const apiKey = bearerApiKey.substring(7);
+
+    console.log(bearerApiKey);
+    if (!apiKey || apiKey !== env.get('API_KEY_QUIZ').asString()) {
       HttpErrorUnauthorizedFactory.create(res, 'Unauthorized Ressources');
     }
     next();
