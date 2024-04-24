@@ -12,6 +12,8 @@ import {
 } from './quiz-session.constant';
 import { UserRepository } from '../user/user.repository';
 import { User } from 'src/user/entities/user.entity';
+import { QuestionRepository } from '../question/question.repository';
+import { Question } from '../question/entities/question.entity';
 
 @Injectable()
 export class QuizSessionService {
@@ -22,6 +24,7 @@ export class QuizSessionService {
   constructor(
     private readonly QuizSessionRepository: QuizSessionRepository,
     private readonly questionService: QuestionService,
+    private readonly questionRepository: QuestionRepository,
     private readonly userRepository: UserRepository,
   ) {}
 
@@ -33,22 +36,20 @@ export class QuizSessionService {
 
   async create(createQuizSessionDto: CreateQuizSessionDto) {
     const questionResult: QuestionResult[] = createQuizSessionDto.quiz;
+    const isUpdateQuestion = await this.updateQuestionAlreadyUsed(
+      questionResult,
+    );
+    if (isUpdateQuestion) {
+      const session = await this.QuizSessionRepository.create(
+        createQuizSessionDto,
+      );
 
-    console.log('=============================');
-    console.log(createQuizSessionDto);
-    console.log('=============================');
+      const sessionWithCorrection = await this.QuizSessionRepository.findById(
+        session._id as string,
+      ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
+      return sessionWithCorrection;
+    }
 
-    await this.updateQuestionAlreadyUsed(questionResult);
-
-    // const session = await this.QuizSessionRepository.create(
-    //   createQuizSessionDto,
-    // );
-
-    // const sessionWithCorrection = await this.QuizSessionRepository.findById(
-    //   session._id as string,
-    // ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
-
-    // return sessionWithCorrection;
     return null;
   }
 
@@ -56,11 +57,38 @@ export class QuizSessionService {
    * update Question Already Used
    */
   async updateQuestionAlreadyUsed(listQuestionResult: QuestionResult[]) {
-    listQuestionResult.map((questionResult: QuestionResult) => {
-      this.questionService.update(questionResult.question as string, {
-        wasUsedDate: new Date(),
+    const allAnswerIsPresentInChoice: boolean =
+      await this.checkAnswerIsPresentInChoice(listQuestionResult);
+    if (allAnswerIsPresentInChoice) {
+      listQuestionResult.map((questionResult: QuestionResult) => {
+        this.questionService.update(questionResult.question as string, {
+          wasUsedDate: new Date(),
+        });
       });
-    });
+    }
+    return allAnswerIsPresentInChoice;
+  }
+
+  /**
+   * check if all answer is present in choice
+   */
+  async checkAnswerIsPresentInChoice(listQuestionResult: QuestionResult[]) {
+    let isPresentInChoice = true;
+
+    for (const questionResult of listQuestionResult) {
+      let question = await this.questionRepository.findById(
+        questionResult.question as string,
+      );
+
+      isPresentInChoice = question.choice.some(
+        (choiceItem) => choiceItem._id == questionResult.userAnswer,
+      );
+
+      if (!isPresentInChoice) {
+        break;
+      }
+    }
+    return isPresentInChoice;
   }
 
   /**
