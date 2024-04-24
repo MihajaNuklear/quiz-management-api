@@ -1,73 +1,73 @@
 {
     "client": "Thunder Client",
     "collectionName": "Quiz",
-    "dateExported": "2024-04-18T13:55:24.017Z",
+    "dateExported": "2024-04-24T14:02:14.018Z",
     "version": "1.1",
     "folders": [
         {
-            "_id": "615c6d3b-4308-4cc0-badf-248f52f35d3e",
+            "_id": "5b58301e-b8e9-42a4-a1f7-9ccb1d4c1f85",
             "name": "backend",
             "containerId": "",
-            "created": "2024-04-18T10:21:11.575Z",
+            "created": "2024-04-22T11:12:30.214Z",
             "sortNum": 10000
         },
         {
-            "_id": "31b0373c-93f4-4b1c-b20c-5ad5485c86d1",
+            "_id": "8e4b9365-1ff2-44fc-a870-4dd3724629d5",
             "name": "user",
-            "containerId": "615c6d3b-4308-4cc0-badf-248f52f35d3e",
-            "created": "2024-04-18T10:21:11.576Z",
+            "containerId": "5b58301e-b8e9-42a4-a1f7-9ccb1d4c1f85",
+            "created": "2024-04-22T11:12:30.215Z",
             "sortNum": 20000
         },
         {
-            "_id": "da796f64-4f4a-49b5-9891-a64e20921da4",
+            "_id": "bb0885a6-cb68-4d66-b683-9a95693735e4",
             "name": "question",
-            "containerId": "615c6d3b-4308-4cc0-badf-248f52f35d3e",
-            "created": "2024-04-18T10:21:11.577Z",
+            "containerId": "5b58301e-b8e9-42a4-a1f7-9ccb1d4c1f85",
+            "created": "2024-04-22T11:12:30.216Z",
             "sortNum": 30000
         },
         {
-            "_id": "31c2d514-f7d3-47cb-8319-82195c614d93",
+            "_id": "f73c776c-36d8-4f0e-90a8-63f45718369f",
             "name": "quizSession",
-            "containerId": "615c6d3b-4308-4cc0-badf-248f52f35d3e",
-            "created": "2024-04-18T10:21:11.578Z",
+            "containerId": "5b58301e-b8e9-42a4-a1f7-9ccb1d4c1f85",
+            "created": "2024-04-22T11:12:30.217Z",
             "sortNum": 40000
         }
     ],
     "requests": [
         {
-            "_id": "1d47b404-a8fb-40d4-9299-5ff2c5dacd8b",
-            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
-            "containerId": "da796f64-4f4a-49b5-9891-a64e20921da4",
+            "_id": "aa0b9cae-0bb4-4852-bc82-fc214a443c24",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "bb0885a6-cb68-4d66-b683-9a95693735e4",
             "name": "post",
             "url": "http://localhost:3000/question",
             "method": "POST",
             "sortNum": 17500,
-            "created": "2024-04-18T10:21:11.576Z",
-            "modified": "2024-04-18T12:12:52.762Z",
+            "created": "2024-04-22T11:12:30.216Z",
+            "modified": "2024-04-23T12:57:26.273Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTBkZWQ1N2YyMzQ0MTJhNmU2ZmNhIiwiZ3JvdXBzIjpbIjY2MjEwZGVkNTdmMjM0NDEyYTZlNmVhZiJdLCJpYXQiOjE3MTM0NDIzNDgsImV4cCI6MTcxMzQ3ODM0OH0.zokSPGGeYzKW96HwhOdttSJVVX7Xa9q-LrSAKxfhF7s"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyNjI1ZmIxMDFhMzU3YTBmMmE5Y2M4IiwiZ3JvdXBzIjpbIjY2MjYyNWZhMTAxYTM1N2EwZjJhOWJhNSJdLCJpYXQiOjE3MTM4NzYwMjEsImV4cCI6MTcxMzkxMjAyMX0.Aw1gNqWpG8Dr9BvwbIZKld59KPD-7dhwf7DXHQJ5ahs"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"questionAsked\":\"what 3?\",\n  \"choice\":[\"z\"],\n  \"trueAnswer\":0\n}",
+                "raw": "{\n  \"questionAsked\":\"what 3?\",\n  \"choice\":[\n    {\n      \"_id\":\"c19db462-901f-4a96-90f8-d13774510e1d\",\n      \"choiceValue\":\"c1\"\n    },\n     {\n      \"_id\":\"6064d93c-8623-4d0c-803e-a45882623348\",\n      \"choiceValue\":\"c2\"\n    }\n  ],\n  \"trueAnswer\":\"6064d93c-8623-4d0c-803e-a45882623348\"\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "e718400a-04f2-43d4-9938-fbf7cb3bebbd",
-            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
-            "containerId": "31b0373c-93f4-4b1c-b20c-5ad5485c86d1",
+            "_id": "647c28ad-1ed6-4c55-afc2-b260b2ec7b3b",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "8e4b9365-1ff2-44fc-a870-4dd3724629d5",
             "name": "login",
             "url": "http://localhost:3000/authentication/login",
             "method": "POST",
             "sortNum": 20000,
-            "created": "2024-04-18T10:21:11.575Z",
-            "modified": "2024-04-18T10:21:11.575Z",
+            "created": "2024-04-22T11:12:30.215Z",
+            "modified": "2024-04-22T11:12:30.215Z",
             "headers": [],
             "params": [],
             "body": {
@@ -78,34 +78,47 @@
             "tests": []
         },
         {
-            "_id": "62e3cc99-1935-4f2b-9c9d-a2c3d50b2742",
-            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
-            "containerId": "da796f64-4f4a-49b5-9891-a64e20921da4",
+            "_id": "a670a87f-b133-4b07-84bf-e516c29d1f4f",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "bb0885a6-cb68-4d66-b683-9a95693735e4",
             "name": "get  without answer ",
-            "url": "http://localhost:3000/question/no-answer/0",
+            "url": "http://localhost:3000/question/no-answer",
             "method": "GET",
             "sortNum": 26250,
-            "created": "2024-04-18T10:21:11.578Z",
-            "modified": "2024-04-18T12:18:49.083Z",
+            "created": "2024-04-22T11:12:30.218Z",
+            "modified": "2024-04-23T11:22:31.041Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMTBkZWQ1N2YyMzQ0MTJhNmU2ZmNhIiwiZ3JvdXBzIjpbIjY2MjEwZGVkNTdmMjM0NDEyYTZlNmVhZiJdLCJpYXQiOjE3MTM0NDIzNDgsImV4cCI6MTcxMzQ3ODM0OH0.zokSPGGeYzKW96HwhOdttSJVVX7Xa9q-LrSAKxfhF7s"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyNjI1ZmIxMDFhMzU3YTBmMmE5Y2M4IiwiZ3JvdXBzIjpbIjY2MjYyNWZhMTAxYTM1N2EwZjJhOWJhNSJdLCJpYXQiOjE3MTM4NzEzMzYsImV4cCI6MTcxMzkwNzMzNn0.XKMHOeJoXG-7xGVDgvNpRMvXoYGBmnlVjE6eLuH1Ufk"
                 }
             ],
-            "params": [],
+            "params": [
+                {
+                    "name": "unusedSince",
+                    "value": "20",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "size",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
             "tests": []
         },
         {
-            "_id": "f5e68ae9-e8a4-4450-a5ab-ae0c12aa0068",
-            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
-            "containerId": "da796f64-4f4a-49b5-9891-a64e20921da4",
+            "_id": "760d4b23-6f84-436e-8f81-f1d9871e21c3",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "bb0885a6-cb68-4d66-b683-9a95693735e4",
             "name": "get  with answer",
             "url": "http://localhost:3000/question/answer",
             "method": "GET",
             "sortNum": 35000,
-            "created": "2024-04-18T10:21:11.577Z",
-            "modified": "2024-04-18T10:21:11.577Z",
+            "created": "2024-04-22T11:12:30.217Z",
+            "modified": "2024-04-22T11:12:30.217Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -116,58 +129,71 @@
             "tests": []
         },
         {
-            "_id": "26e5df46-7a46-4f5e-aaf2-33164c67e8dd",
-            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
-            "containerId": "31c2d514-f7d3-47cb-8319-82195c614d93",
+            "_id": "adabb28b-c529-4020-b76c-6b6cab64d6c6",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "f73c776c-36d8-4f0e-90a8-63f45718369f",
             "name": "post",
             "url": "http://localhost:3000/quizSession",
             "method": "POST",
             "sortNum": 45000,
-            "created": "2024-04-18T10:21:11.579Z",
-            "modified": "2024-04-18T10:21:11.579Z",
+            "created": "2024-04-22T11:12:30.219Z",
+            "modified": "2024-04-23T13:47:11.768Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMGUxMDRlM2EwMTBlOGE2MjA5MmJjIiwiZ3JvdXBzIjpbIjY2MjBlMTA0ZTNhMDEwZThhNjIwOTFhMSJdLCJpYXQiOjE3MTM0MzA4NTAsImV4cCI6MTcxMzQ2Njg1MH0.Zmyl_s0PRQZhT-OXG5-AIwGYQwO380tS9_giPUd-Pm4"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyNjI1ZmIxMDFhMzU3YTBmMmE5Y2M4IiwiZ3JvdXBzIjpbIjY2MjYyNWZhMTAxYTM1N2EwZjJhOWJhNSJdLCJpYXQiOjE3MTM4Nzc5NTMsImV4cCI6MTcxMzkxMzk1M30.CS4dj6A0zkhIeGTpME3pEOuALKAB9DM6VxMm8Q9Mblc"
                 }
             ],
             "params": [],
             "body": {
                 "type": "json",
-                "raw": "{\n  \"user\":\"6620d2ff429af750b7314b2e\",\n  \"quiz\" :[\n      {\n        \"question\":\"6620e14fdce29582f4debcb7\",\n        \"userAnswer\":1\n      },\n       {\n        \"question\":\"6620e151dce29582f4debcc9\",\n        \"userAnswer\":2\n      }\n   ]\n}",
+                "raw": "{\n  \"quiz\" :[\n      {\n        \"question\":\"6627bb534bc1cfc885b929c7\",\n        \"userAnswer\":\"bfc64b4d-ff4f-4088-9975-54c69b9acb2d\"\n      },\n       {\n        \"question\":\"6627bb534bc1cfc885b929c7\",\n        \"userAnswer\":\"b2993ee2-cb0a-4c33-8dec-698c333a5129\"\n      },\n       {\n        \"question\":\"6627bb534bc1cfc885b929c7\",\n        \"userAnswer\":\"06765ca3-c677-4ed1-9588-ee113ae29195\"\n      }\n   ]\n}",
                 "form": []
             },
             "tests": []
         },
         {
-            "_id": "83a622b5-8c2f-4d67-82be-800d2dafc7e8",
-            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
-            "containerId": "31c2d514-f7d3-47cb-8319-82195c614d93",
+            "_id": "394974da-d1ec-499e-a8cd-8af32cf6947b",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "f73c776c-36d8-4f0e-90a8-63f45718369f",
             "name": "get",
             "url": "http://localhost:3000/quizSession",
             "method": "GET",
             "sortNum": 55000,
-            "created": "2024-04-18T10:21:11.580Z",
-            "modified": "2024-04-18T10:21:11.580Z",
+            "created": "2024-04-22T11:12:30.220Z",
+            "modified": "2024-04-23T06:28:39.946Z",
             "headers": [
                 {
                     "name": "Authorization",
-                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyMGRlMDUwZGJiZTVhYTM4OGZhMGM1IiwiZ3JvdXBzIjpbIjY2MjBkZTA0MGRiYmU1YWEzODhmOWZhYSJdLCJpYXQiOjE3MTM0MzAwODMsImV4cCI6MTcxMzQ2NjA4M30.Q40liVR01o3u1wSYgp7mmXUTG0l0PIfWOqe4tU2qw1w"
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyNjI1ZmIxMDFhMzU3YTBmMmE5Y2M4IiwiZ3JvdXBzIjpbIjY2MjYyNWZhMTAxYTM1N2EwZjJhOWJhNSJdLCJpYXQiOjE3MTM4NTM2MjEsImV4cCI6MTcxMzg4OTYyMX0.aUN_roAkUZmpc-SiPhArzdrSgyXkPhQ6R-yxg9xE-m4"
                 }
             ],
-            "params": [],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "2",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
             "tests": []
         },
         {
-            "_id": "bc2a1c9a-7819-490e-99d4-bdc71301d01e",
-            "colId": "54773f3e-3a31-46c7-b113-89d3e5c2fff3",
-            "containerId": "da796f64-4f4a-49b5-9891-a64e20921da4",
+            "_id": "11f45472-618a-4a67-bd55-21810883dcef",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "bb0885a6-cb68-4d66-b683-9a95693735e4",
             "name": "patch",
             "url": "http://localhost:3000/question/6620de583b0315f29e813064",
             "method": "PATCH",
             "sortNum": 65000,
-            "created": "2024-04-18T10:21:11.581Z",
-            "modified": "2024-04-18T10:21:11.581Z",
+            "created": "2024-04-22T11:12:30.221Z",
+            "modified": "2024-04-22T11:12:30.221Z",
             "headers": [
                 {
                     "name": "Authorization",
@@ -180,6 +206,62 @@
                 "raw": "{\n \"wasUsedTime\" :\"utilisé\"\n}",
                 "form": []
             },
+            "tests": []
+        },
+        {
+            "_id": "79acc176-1e6d-4939-9d31-a08b62f06ed8",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "f73c776c-36d8-4f0e-90a8-63f45718369f",
+            "name": "get by id",
+            "url": "http://localhost:3000/quizSession/6627b4152a88f6286843af35",
+            "method": "GET",
+            "sortNum": 65000,
+            "created": "2024-04-23T13:18:15.132Z",
+            "modified": "2024-04-23T13:20:27.056Z",
+            "headers": [
+                {
+                    "name": "Authorization",
+                    "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6ImFkbWluIiwiX2lkIjoiNjYyNjI1ZmIxMDFhMzU3YTBmMmE5Y2M4IiwiZ3JvdXBzIjpbIjY2MjYyNWZhMTAxYTM1N2EwZjJhOWJhNSJdLCJpYXQiOjE3MTM4Nzg0MTcsImV4cCI6MTcxMzkxNDQxN30.YS1LALVbvUnUKAaBxJ4USvQ0bmhF5eHD4xw7bYyuZIM"
+                }
+            ],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isDisabled": true,
+                    "isPath": false
+                }
+            ],
+            "tests": []
+        },
+        {
+            "_id": "832d9e78-32b3-4019-9439-dc911374a0b3",
+            "colId": "2cec4763-57a8-464f-8f64-9cca07ed784d",
+            "containerId": "f73c776c-36d8-4f0e-90a8-63f45718369f",
+            "name": "paginated",
+            "url": "http://localhost:3000/quizSession/list?page=1&pageSize=2",
+            "method": "GET",
+            "sortNum": 75000,
+            "created": "2024-04-23T06:28:51.069Z",
+            "modified": "2024-04-24T13:16:56.715Z",
+            "headers": [
+                {
+                    "name": "api-key-quiz",
+                    "value": "secretKey"
+                }
+            ],
+            "params": [
+                {
+                    "name": "page",
+                    "value": "1",
+                    "isPath": false
+                },
+                {
+                    "name": "pageSize",
+                    "value": "2",
+                    "isPath": false
+                }
+            ],
             "tests": []
         }
     ]
