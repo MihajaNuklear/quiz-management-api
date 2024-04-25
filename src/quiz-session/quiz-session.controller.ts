@@ -52,6 +52,7 @@ export class QuizSessionController {
     const result = await this.QuizSessionService.findAll();
     HttpResponseService.sendSuccess<QuizSession[]>(res, HttpStatus.OK, result);
   }
+  @RequirePrivilege(PrivilegeName.VIEW_QUIZ_SESSION)
   @Get('list')
   async getPaginated(
     @Query() queryParams: ListCriteria,

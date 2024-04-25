@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Question, QuestionSchema } from './entities/question.entity';
 import { QuestionController } from './question.controller';
@@ -8,7 +8,7 @@ import { HistoryModule } from '../history/history.module';
 import { QuestionRepository } from './question.repository';
 import { QuestionService } from './question.service';
 import { CountModule } from '../count/count.module';
-import { ApiKeyMiddleware } from 'src/quiz-session/quiz-session.apikeyMiddleware';
+ 
 
 @Module({
   imports: [
@@ -23,8 +23,6 @@ import { ApiKeyMiddleware } from 'src/quiz-session/quiz-session.apikeyMiddleware
   providers: [QuestionService, QuestionRepository],
   exports: [QuestionRepository, QuestionService],
 })
-export class QuestionModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ApiKeyMiddleware).forRoutes('question');
-  }
+export class QuestionModule  {
+ 
 }

@@ -47,6 +47,12 @@ export class RequirePrivilegeGuard
    * @returns Promise of boolean, true if the user has the required Privilege, false otherwise
    */
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    console.log( " bearerApiKey ======================================================")
+    const requestApiKey = context.switchToHttp().getRequest();
+    const bearerApiKey = requestApiKey.headers.authorization;
+
+    console.log(bearerApiKey)
+    console.log( "bearerApiKey ======================================================")
     const requiredPrivilegeNames = this.reflector.getAllAndOverride<
       PrivilegeName[]
     >(REQUIRE_PRIVILEGE_KEY, [context.getHandler(), context.getClass()]);

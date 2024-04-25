@@ -56,6 +56,8 @@ export class HttpResponseService {
      * @param httpErrorDetails Details of the error following the RFC7807 structure
      */
     public static sendError(response: FastifyReply, statusCode: HttpStatus, httpErrorDetails: HttpErrorDetails): void {
+       
+        console.log("senderror ",response)
         response
             .code(statusCode)
             .header(this.CONTENT_TYPE, this.APPLICATION_PROBLEM_JSON)
