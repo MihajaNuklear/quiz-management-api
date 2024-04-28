@@ -9,6 +9,7 @@ import {
   Res,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { QuizSessionService } from './quiz-session.service';
 import { FastifyReply } from 'fastify';
@@ -20,6 +21,7 @@ import { PrivilegeName } from '../privilege/entities/privilege.entity';
 import { RequirePrivilege } from '../core/decorators/require-privilege.decorator';
 import { ListCriteria } from 'src/shared/types/list-criteria.class';
 import { PaginatedQuizSession } from './paginated-quizSession.interface';
+import { ApiKeyGuard } from './quiz-session.middleware';
 
 @Controller('quizSession')
 export class QuizSessionController {
@@ -52,7 +54,8 @@ export class QuizSessionController {
     const result = await this.QuizSessionService.findAll();
     HttpResponseService.sendSuccess<QuizSession[]>(res, HttpStatus.OK, result);
   }
-  @RequirePrivilege(PrivilegeName.VIEW_QUIZ_SESSION)
+  
+ @UseGuards(ApiKeyGuard)
   @Get('list')
   async getPaginated(
     @Query() queryParams: ListCriteria,
