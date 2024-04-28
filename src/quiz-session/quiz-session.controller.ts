@@ -17,8 +17,7 @@ import { HttpResponseService } from '../core/services/http-response/http-respons
 import { CreateQuizSessionDto } from './dto/create-quiz-session.dto';
 import { QuizSession } from './entities/quiz-session.entity';
 import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
-import { PrivilegeName } from '../privilege/entities/privilege.entity';
-import { RequirePrivilege } from '../core/decorators/require-privilege.decorator';
+ 
 import { ListCriteria } from 'src/shared/types/list-criteria.class';
 import { PaginatedQuizSession } from './paginated-quizSession.interface';
 import { ApiKeyGuard } from './quiz-session.middleware';
@@ -32,6 +31,7 @@ export class QuizSessionController {
    * @param createQuizSessionDto QuizSession that will be created
    * @param res Fastify response
    */
+  @UseGuards(ApiKeyGuard)
   @Post()
   async create(
     @Body() createQuizSessionDto: CreateQuizSessionDto,
@@ -49,6 +49,7 @@ export class QuizSessionController {
    * Get all QuizSessions inside database
    * @param res Fastify response
    */
+  @UseGuards(ApiKeyGuard)
   @Get()
   async findAll(@Res() res: FastifyReply) {
     const result = await this.QuizSessionService.findAll();
@@ -75,6 +76,7 @@ export class QuizSessionController {
    * @param id _id of the QuizSession
    * @param res Fastify response
    */
+  @UseGuards(ApiKeyGuard)
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuizSessionService.findOne(id);
@@ -87,7 +89,7 @@ export class QuizSessionController {
    * @param updateQuizSessionDto update of QuizSession
    * @param res Fastify response
    */
-
+  @UseGuards(ApiKeyGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -105,7 +107,7 @@ export class QuizSessionController {
    * @param id _id of QuizSession to be deleted
    * @param res Fastify response
    */
-
+  @UseGuards(ApiKeyGuard)
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuizSessionService.remove(id);

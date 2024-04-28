@@ -9,6 +9,7 @@ import {
   Res,
   HttpStatus,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { QuestionService } from './question.service';
 import { FastifyReply } from 'fastify';
@@ -20,6 +21,7 @@ import { PrivilegeName } from '../privilege/entities/privilege.entity';
 import { RequirePrivilege } from '../core/decorators/require-privilege.decorator';
 import { ListCriteria } from 'src/shared/types/list-criteria.class';
 import { PaginatedQuestion } from './paginated-question.interface';
+import { ApiKeyGuard } from 'src/quiz-session/quiz-session.middleware';
 
 export interface QuestionCriteria {
   unusedSince: number;
@@ -34,7 +36,7 @@ export class QuestionController {
    * @param createQuestionDto Question that will be created
    * @param res Fastify response
    */
-
+  @UseGuards(ApiKeyGuard)
   @Post()
   async create(
     @Body() createQuestionDto: CreateQuestionDto,
@@ -48,7 +50,7 @@ export class QuestionController {
    * Get all Questions inside database without answer
    * @param res Fastify response
    */
-
+  @UseGuards(ApiKeyGuard)
   @Get('no-answer')
   async findAllWithoutAnswer(
     @Query() queryParams: QuestionCriteria,
@@ -67,7 +69,7 @@ export class QuestionController {
    * Get all Questions inside database
    * @param res Fastify response
    */
-
+  @UseGuards(ApiKeyGuard)
   @Get('answer/:size?')
   async findAllWithAnswer(
     @Param('size') size: number,
@@ -81,7 +83,7 @@ export class QuestionController {
    * Get paginated  Questions inside database
    * @param res Fastify response
    */
-
+  @UseGuards(ApiKeyGuard)
   @Get('list')
   async getPaginated(
     @Query() queryParams: ListCriteria,
@@ -102,7 +104,7 @@ export class QuestionController {
    * @param id _id of the Question
    * @param res Fastify response
    */
-
+  @UseGuards(ApiKeyGuard)
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuestionService.findOne(id);
