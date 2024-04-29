@@ -46,7 +46,7 @@ export class QuizSessionController {
   }
 
   /**
-   * Get all QuizSessions inside database
+   * Get all QuizSessions inside databasee
    * @param res Fastify response
    */
   @UseGuards(ApiKeyGuard)
