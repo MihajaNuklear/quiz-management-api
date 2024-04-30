@@ -40,6 +40,12 @@ export class Count {
    */
   @Prop({ type: Number, default: 0 })
   countQuestionValue: number;
+
+    /**
+   * count question Value
+   */
+    @Prop({ type: Number, default: 0 })
+    countQuizValue: number;
 }
 
 /**

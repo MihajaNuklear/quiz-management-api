@@ -117,7 +117,7 @@ export class QuestionController {
    * @param updateQuestionDto update of Question
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.EDIT_QUESTION)
+  @UseGuards(ApiKeyGuard)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -132,7 +132,7 @@ export class QuestionController {
    * @param id _id of Question to be deleted
    * @param res Fastify response
    */
-  @RequirePrivilege(PrivilegeName.DELETE_QUESTION)
+  @UseGuards(ApiKeyGuard)
   @Delete(':id')
   async remove(@Param('id') id: string, @Res() res: FastifyReply) {
     const result = await this.QuestionService.remove(id);

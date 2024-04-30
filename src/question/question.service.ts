@@ -32,7 +32,7 @@ export class QuestionService {
     const questionNumber = await this.generatingUsernameQuestion();
     const result = await this.QuestionRepository.create({
       ...createQuestionDto,
-      questionNumber: questionNumber,
+      questionNumber: questionNumber ,
     });
     return result;
   }
@@ -133,7 +133,7 @@ export class QuestionService {
  
    * @returns Username Question Number with based name
    */
-  async generatingUsernameQuestion(): Promise<number> {
+  async generatingUsernameQuestion(): Promise<string> {
     let count = 1;
     const countQueue: any | null = await this.countRepository.findOne({});
     const lastCount = countQueue.countQuestionValue;
@@ -141,6 +141,6 @@ export class QuestionService {
     await this.countRepository.update(countQueue._id, {
       countQuestionValue: count,
     });
-    return count;
+    return count.toString();
   }
 }

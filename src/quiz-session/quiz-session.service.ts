@@ -11,6 +11,7 @@ import {
   QUIZ_SESSION_SEARCH_FIELDS,
 } from './quiz-session.constant';
 import { QuestionRepository } from '../question/question.repository';
+import { CountRepository } from '../count/count.repository';
 
 @Injectable()
 export class QuizSessionService {
@@ -22,8 +23,9 @@ export class QuizSessionService {
     private readonly QuizSessionRepository: QuizSessionRepository,
     private readonly questionService: QuestionService,
     private readonly questionRepository: QuestionRepository,
+    private readonly countRepository: CountRepository,
 
-  ) {}
+  ) { }
 
   /**
    * Create a QuizSession
@@ -32,13 +34,17 @@ export class QuizSessionService {
    */
 
   async create(createQuizSessionDto: CreateQuizSessionDto) {
+    const quizNumber = await this.generatingUsernameQuiz();
     const questionResult: QuestionResult[] = createQuizSessionDto.quiz;
     const isUpdateQuestion = await this.updateQuestionAlreadyUsed(
       questionResult,
     );
     if (isUpdateQuestion) {
-      const session = await this.QuizSessionRepository.create(
-        createQuizSessionDto,
+      const session = await this.QuizSessionRepository.create({
+        ...createQuizSessionDto,
+        quizNumber: quizNumber
+      }
+
       );
 
       const sessionWithCorrection = await this.QuizSessionRepository.findById(
@@ -156,4 +162,21 @@ export class QuizSessionService {
     const result = await this.QuizSessionRepository.delete(id);
     return result;
   }
+
+  /**
+ * Generate Username Quiz Number
+ 
+ * @returns Username Quiz Number with based name
+ */
+  async generatingUsernameQuiz(): Promise<string> {
+    let count = 1;
+    const countQueue: any | null = await this.countRepository.findOne({});
+    const lastCount = countQueue.countQuizValue;
+    count = lastCount === 0 ? 1 : lastCount + 1;
+    await this.countRepository.update(countQueue._id, {
+      countQuizValue: count,
+    });
+    return count.toString();
+  }
 }
+

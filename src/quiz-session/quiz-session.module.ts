@@ -8,6 +8,7 @@ import { PrivilegeModule } from '../privilege/privilege.module';
 import { HistoryModule } from '../history/history.module';
 import { QuestionModule } from '../question/question.module';
 import { UserModule } from '../user/user.module';
+import { CountModule } from '../count/count.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from '../user/user.module';
     HistoryModule,
     QuestionModule,
     UserModule,
+    CountModule
   ],
   controllers: [QuizSessionController],
   providers: [QuizSessionService, QuizSessionRepository],
