@@ -14,6 +14,7 @@ export const QUESTION_SEARCH_FIELDS: string[] = [
 export const QUESTIONS_SEARCH_INDEX = 'questions-search';
 
 export const QUESTIONS_SEARCH_FIELDS_WITH_MONGO_SEARCH = [
-  'questionNumber'
+  'questionNumber',
+  'wasUsedDate'
 ];
 export const QUESTIONS_LOOKUP_STAGES = [];

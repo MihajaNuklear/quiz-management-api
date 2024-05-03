@@ -17,7 +17,7 @@ const choiceSchema = SchemaFactory.createForClass(Choice);
 /**
  * Represents a Question
  */
-@Schema()
+@Schema({ timestamps: true })
 export class Question {
   /**
    * Id  of Question
