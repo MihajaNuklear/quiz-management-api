@@ -17,7 +17,7 @@ import { HttpResponseService } from '../core/services/http-response/http-respons
 import { CreateQuizSessionDto } from './dto/create-quiz-session.dto';
 import { QuizSession } from './entities/quiz-session.entity';
 import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
- 
+
 import { ListCriteria } from 'src/shared/types/list-criteria.class';
 import { PaginatedQuizSession } from './paginated-quizSession.interface';
 import { ApiKeyGuard } from './quiz-session.middleware';
@@ -38,11 +38,18 @@ export class QuizSessionController {
     @Res() res: FastifyReply,
   ) {
     const result = await this.QuizSessionService.create(createQuizSessionDto);
-    HttpResponseService.sendSuccess<QuizSession>(
-      res,
-      HttpStatus.CREATED,
-      result,
-    );
+    result
+      ? HttpResponseService.sendSuccess<QuizSession>(
+          res,
+          HttpStatus.CREATED,
+          result,
+        )
+      : HttpResponseService.sendError(res, HttpStatus.BAD_REQUEST, {
+          type: 'invalid_data',
+          title: 'Invalid Data Provided',
+          message:
+            'The format of the data sent is invalid. Please check the data and try again.',
+        });
   }
 
   /**
@@ -55,8 +62,8 @@ export class QuizSessionController {
     const result = await this.QuizSessionService.findAll();
     HttpResponseService.sendSuccess<QuizSession[]>(res, HttpStatus.OK, result);
   }
-  
- @UseGuards(ApiKeyGuard)
+
+  @UseGuards(ApiKeyGuard)
   @Get('list')
   async getPaginated(
     @Query() queryParams: ListCriteria,
