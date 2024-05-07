@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { QuizSessionRepository } from './quiz-session.repository';
 import { CreateQuizSessionDto } from './dto/create-quiz-session.dto';
 import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
-import { QuestionResult } from './entities/quiz-session.entity';
+import { QuestionResult, QuizSession } from './entities/quiz-session.entity';
 import { QuestionService } from '../question/question.service';
 import { ListCriteria } from 'src/shared/types/list-criteria.class';
 import { PaginatedQuizSession } from './paginated-quizSession.interface';
@@ -34,12 +34,14 @@ export class QuizSessionService {
    */
 
   async create(createQuizSessionDto: CreateQuizSessionDto) {
+
     const quizNumber = await this.generatingUsernameQuiz();
     const questionResult: QuestionResult[] = createQuizSessionDto.quiz;
     const isUpdateQuestion = await this.updateQuestionAlreadyUsed(
       questionResult,
     );
     if (isUpdateQuestion) {
+      await this.updateIsValidAnswer(createQuizSessionDto)
       const session = await this.QuizSessionRepository.create({
         ...createQuizSessionDto,
         quizNumber: quizNumber
@@ -49,11 +51,25 @@ export class QuizSessionService {
 
       const sessionWithCorrection = await this.QuizSessionRepository.findById(
         session._id as string,
-      ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
+      )
+        .populate([{ path: 'quiz', populate: { path: 'question' } }]);
       return sessionWithCorrection;
     }
 
     return null;
+  }
+
+
+  /**
+   * update isValidAnswer 
+   */
+  
+  async updateIsValidAnswer(createQuizSessionDto: CreateQuizSessionDto) {
+    const questionResult: QuestionResult[] = createQuizSessionDto.quiz;
+    await Promise.all(questionResult.map(async (result, index) => {
+      let question = await this.questionRepository.findById(result.question as string);
+      result.isValidAnswer = result.userAnswer == question.trueAnswer
+    }));
   }
 
   /**

@@ -6,11 +6,16 @@ import mongoose, { HydratedDocument, Types } from 'mongoose';
  */
 @Schema()
 export class QuestionResult {
+  @Prop({ type: String })
+  userAnswer: string;
+
+  @Prop({ type: Boolean })
+  isValidAnswer?: boolean;
+
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Question' })
   question: string | Types.ObjectId;
 
-  @Prop({ type: String })
-  userAnswer: string;
+ 
 }
 
 const questionResultSchema = SchemaFactory.createForClass(QuestionResult);
