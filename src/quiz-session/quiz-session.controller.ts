@@ -21,6 +21,7 @@ import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
 import { ListCriteria } from 'src/shared/types/list-criteria.class';
 import { PaginatedQuizSession } from './paginated-quizSession.interface';
 import { ApiKeyGuard } from './quiz-session.middleware';
+import { QuizSessionFormated } from './entities/quiz-session.formated';
 
 @Controller('quizSession')
 export class QuizSessionController {
@@ -37,7 +38,7 @@ export class QuizSessionController {
     @Body() createQuizSessionDto: CreateQuizSessionDto,
     @Res() res: FastifyReply,
   ) {
-    const result = await this.QuizSessionService.create(createQuizSessionDto);
+    const result:any = await this.QuizSessionService.create(createQuizSessionDto);
     result
       ? HttpResponseService.sendSuccess<QuizSession>(
           res,

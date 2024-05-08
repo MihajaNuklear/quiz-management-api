@@ -12,6 +12,12 @@ import {
 } from './quiz-session.constant';
 import { QuestionRepository } from '../question/question.repository';
 import { CountRepository } from '../count/count.repository';
+import {
+  QuestionResultFormated,
+  QuizSessionFormated,
+} from './entities/quiz-session.formated';
+import { Question } from 'src/question/entities/question.entity';
+import { QuestionResultNotFormated } from './entities/quz-session.notFormated';
 
 @Injectable()
 export class QuizSessionService {
@@ -24,8 +30,7 @@ export class QuizSessionService {
     private readonly questionService: QuestionService,
     private readonly questionRepository: QuestionRepository,
     private readonly countRepository: CountRepository,
-
-  ) { }
+  ) {}
 
   /**
    * Create a QuizSession
@@ -34,42 +39,80 @@ export class QuizSessionService {
    */
 
   async create(createQuizSessionDto: CreateQuizSessionDto) {
-
     const quizNumber = await this.generatingUsernameQuiz();
     const questionResult: QuestionResult[] = createQuizSessionDto.quiz;
     const isUpdateQuestion = await this.updateQuestionAlreadyUsed(
       questionResult,
     );
     if (isUpdateQuestion) {
-      await this.updateIsValidAnswer(createQuizSessionDto)
+      await this.updateIsValidAnswer(createQuizSessionDto);
       const session = await this.QuizSessionRepository.create({
         ...createQuizSessionDto,
-        quizNumber: quizNumber
-      }
-
-      );
+        quizNumber: quizNumber,
+      });
 
       const sessionWithCorrection = await this.QuizSessionRepository.findById(
         session._id as string,
-      )
-        .populate([{ path: 'quiz', populate: { path: 'question' } }]);
-      return sessionWithCorrection;
+      ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
+      return this.formatQuizSessionResponse(sessionWithCorrection);
     }
 
     return null;
   }
 
+  /**
+   * format quiz session response
+   */
+
+  formatQuizSessionResponse(quizSession: any) {
+    let quizSessionFormated: QuizSessionFormated;
+    quizSessionFormated = {
+      _id: quizSession._id,
+      quizNumber: quizSession.quizNumber,
+      quiz: this.formatQuiz(quizSession.quiz),
+      createdAt: quizSession.createdAt,
+      updatedAt: quizSession.updatedAt,
+    };
+
+    return quizSessionFormated;
+  }
 
   /**
-   * update isValidAnswer 
+   * format quiz response
    */
-  
+
+  formatQuiz(quizList: QuestionResultNotFormated[]) {
+    let quizFormated: QuestionResultFormated[] = quizList.map((quiz) => ({
+      _id: quiz._id,
+      userAnswer: quiz.userAnswer,
+      trueAnswer: quiz.question.trueAnswer,
+      isValidAnswer: quiz.isValidAnswer,
+      question: {
+        _id: quiz.question._id,
+        questionNumber: quiz.question.questionNumber,
+        questionAsked: quiz.question.questionAsked,
+        choice: quiz.question.choice,
+        wasUsedDate: quiz.question.wasUsedDate,
+        createdAt: quiz.question.createdAt,
+        updatedAt: quiz.question.updatedAt,
+      },
+    }));
+    return quizFormated;
+  }
+  /**
+   * update isValidAnswer
+   */
+
   async updateIsValidAnswer(createQuizSessionDto: CreateQuizSessionDto) {
     const questionResult: QuestionResult[] = createQuizSessionDto.quiz;
-    await Promise.all(questionResult.map(async (result, index) => {
-      let question = await this.questionRepository.findById(result.question as string);
-      result.isValidAnswer = result.userAnswer == question.trueAnswer
-    }));
+    await Promise.all(
+      questionResult.map(async (result, index) => {
+        let question = await this.questionRepository.findById(
+          result.question as string,
+        );
+        result.isValidAnswer = result.userAnswer == question.trueAnswer;
+      }),
+    );
   }
 
   /**
@@ -195,4 +238,3 @@ export class QuizSessionService {
     return count.toString();
   }
 }
-
