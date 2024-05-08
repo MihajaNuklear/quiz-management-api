@@ -6,6 +6,7 @@ export interface QuizSessionNotFormated {
   quiz: QuestionResultNotFormated[];
   createdAt: Date;
   updatedAt: Date;
+  __v?: number;
 }
 
 export interface QuestionResultNotFormated {
@@ -24,4 +25,5 @@ export interface QuestionNotFormated {
   wasUsedDate?: Date;
   createdAt: Date;
   updatedAt: Date;
+  __v?: number;
 }

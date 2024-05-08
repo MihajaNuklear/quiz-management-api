@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { QuizSessionRepository } from './quiz-session.repository';
 import { CreateQuizSessionDto } from './dto/create-quiz-session.dto';
 import { UpdateQuizSessionDto } from './dto/update-quiz-session.dto';
-import { QuestionResult, QuizSession } from './entities/quiz-session.entity';
+import { QuestionResult } from './entities/quiz-session.entity';
 import { QuestionService } from '../question/question.service';
 import { ListCriteria } from 'src/shared/types/list-criteria.class';
 import { PaginatedQuizSession } from './paginated-quizSession.interface';
@@ -16,8 +16,10 @@ import {
   QuestionResultFormated,
   QuizSessionFormated,
 } from './entities/quiz-session.formated';
-import { Question } from 'src/question/entities/question.entity';
-import { QuestionResultNotFormated } from './entities/quz-session.notFormated';
+import {
+  QuestionResultNotFormated,
+  QuizSessionNotFormated,
+} from './entities/quz-session.notFormated';
 
 @Injectable()
 export class QuizSessionService {
@@ -51,9 +53,10 @@ export class QuizSessionService {
         quizNumber: quizNumber,
       });
 
-      const sessionWithCorrection = await this.QuizSessionRepository.findById(
-        session._id as string,
-      ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
+      const sessionWithCorrection: QuizSessionNotFormated =
+        await this.QuizSessionRepository.findById(
+          session._id as string,
+        ).populate([{ path: 'quiz', populate: { path: 'question' } }]);
       return this.formatQuizSessionResponse(sessionWithCorrection);
     }
 
@@ -64,7 +67,7 @@ export class QuizSessionService {
    * format quiz session response
    */
 
-  formatQuizSessionResponse(quizSession: any) {
+  formatQuizSessionResponse(quizSession: QuizSessionNotFormated) {
     let quizSessionFormated: QuizSessionFormated;
     quizSessionFormated = {
       _id: quizSession._id,
